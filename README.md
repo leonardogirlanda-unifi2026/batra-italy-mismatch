@@ -94,7 +94,7 @@ batra_taxonomy.tsv
 
 ### 5) Dereplication 
 
-05_per_species_derep.sh
+05_per_species_derep.py
 
 Sequences were:
 
@@ -102,21 +102,23 @@ Sequences were:
 
 -Dereplicated using VSEARCH (--derep_fulllength)
 
-### 6) Variants report
-
-06_variants_report
-
-
 Final dataset:
 
-100 unique sequence variants
+100 unique sequence variants for 34 species.
+
+
+### 6) Variants report
+
+06_variants_report.sh
 
 Report file:
 
-haplotype_report.tsv
+variants_report.tsv
 
 
 ### 7️) Primer Mismatch Analysis (PrimerMiner)
+
+07_primerminer_eval.R
 
 Mismatch scoring performed in R using PrimerMiner.
 
@@ -128,9 +130,11 @@ Penalty score thresholds (Elbrecht & Leese 2017):
 
 Observed maximum penalty score:
 
-59.4
+59.75
 
 No systematic 3′-terminal mismatch accumulation detected.
+
+results: Batra_F_eval.tsv Batra_R_eval.tsv Table1_mismatch_summary.tsv
 
 
 ## Key Results
@@ -160,13 +164,25 @@ The study also generated the first complete Batra amplicon reference sequence fo
 
 │   ├── 02_crabs_insilico_pcr.sh
 
-│   ├── 03_taxonomy_assignment.sh
+│   ├── 03_fetch_full_sequences.sh
 
-│   ├── 04_dereplication.sh
+│   ├── 04_assign_tax.sh
 
-│   ├── 05_primer_miner.R
+│   ├── 05_per_species_derep.py
+
+│   ├── 06_variants_report.sh
+
+│   ├── 07_primerminer_eval.R
 
 ├── data/
+
+│   ├── Batra_primers.fasta
+
+│   ├── accessions_amplicons_408.txt
+
+│   ├── accessions_manually_discarded.txt
+
+│   ├── accessions_initial_919.txt
 
 │   ├── lista_anfibi.txt
 
@@ -176,9 +192,13 @@ The study also generated the first complete Batra amplicon reference sequence fo
 
 ├── results/
 
-│   ├── Batra_F_eval.csv
+│   ├── Batra_F_eval.tsv
 
-│   ├── Batra_R_eval.csv
+│   ├── Batra_R_eval.tsv
+
+│   ├── Table1_mismatch_summary.tsv
+
+│   ├── variants_report.tsv
 
 └── README.md
 
