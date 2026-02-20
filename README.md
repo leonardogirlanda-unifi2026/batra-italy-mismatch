@@ -184,11 +184,11 @@ The study also generated the first complete Batra amplicon reference sequence fo
 
 │   ├── accessions_initial_919.txt
 
-│   ├── lista_anfibi.txt
+│   ├── evaluated_species_34.txt
 
-│   ├── batra_uniqueseq_itamph.fasta
+│   ├── missing_taxa_19.txt
 
-│   ├── haplotype_report.tsv
+│   ├── species_list_53.txt
 
 ├── results/
 
@@ -197,6 +197,8 @@ The study also generated the first complete Batra amplicon reference sequence fo
 │   ├── Batra_R_eval.tsv
 
 │   ├── Table1_mismatch_summary.tsv
+
+│   ├── batra_taxonomy.tsv
 
 │   ├── variants_report.tsv
 
