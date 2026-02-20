@@ -15,19 +15,23 @@ The objective is to evaluate the technical feasibility of applying the Batra mar
 
 ### 1) Reference Sequence Retrieval
 
+01_ncbi_download.sh
+
 53 Italian amphibian taxa (native + invasive/potentially invasive)
 
-12S mitochondrial sequences downloaded from NCBI using Entrez Direct
+-12S mitochondrial sequences downloaded from NCBI using esearch
 
-Query restricted to mitochondrial 12S rRNA regions
+-Query restricted to mitochondrial 12S rRNA regions
 
-Length filter applied
+-Length filter applied (not to retrieve nuclear sequences)
 
 Output:
 
 italian_amphibians_12S.fasta
 
-### 2️) In Silico PCR (CRABS)
+### 2) In Silico PCR (CRABS)
+
+02_crabs_insilico_pcr.sh
 
 Sequences were filtered to retain only those predicted to amplify with the Batra primer pair:
 ```
@@ -49,25 +53,27 @@ batra_12S_amplicons.fasta
 
 ### 3️) Recovery of Full Sequences
 
+03_fetch_full_sequences.sh
+
 Accession numbers were extracted and re-downloaded to obtain full mitochondrial sequences containing primer binding sites.
 
 Output:
 
 batra_full_sequences.fasta
 
-### 4️) Manual Curation and Primer Validation
+### Manual Curation and Primer Validation in Geneious Prime
 
 Sequences were:
 
--Checked in Geneious
+-uploaded and checked in Geneious Prime
 
--Tested for primer binding (≤4 mismatches allowed)
+-Tested for primer binding (using: "test with saved primers", ≤4 mismatches allowed)
 
 -Aligned using MAFFT
 
 -Trimmed to include amplicon + primer binding regions
 
-Outlier sequences (very old, inconsistent mismatch patterns) were manually removed.
+Outlier sequences ( inconsistent mismatch patterns with all the other variants of a species) were manually removed.
 
 Final curated dataset:
 
@@ -75,7 +81,9 @@ Final curated dataset:
 34 species
 
 
-### 5️) Taxonomic Assignment (CRABS)
+### 4) Taxonomic Assignment (CRABS)
+
+04_assign_tax.sh
 
 Taxonomy assigned using NCBI taxonomy database.
 
@@ -84,13 +92,19 @@ Output:
 batra_taxonomy.tsv
 
 
-### 6️) Dereplication and Variant Analysis
+### 5) Dereplication 
+
+05_per_species_derep.sh
 
 Sequences were:
 
 -Grouped by species
 
 -Dereplicated using VSEARCH (--derep_fulllength)
+
+### 6) Variants report
+
+06_variants_report
 
 
 Final dataset:
