@@ -51,7 +51,7 @@ Output:
 
 batra_12S_amplicons.fasta
 
-### 3️) Recovery of Full Sequences
+### 3) Recovery of Full Sequences
 
 03_fetch_full_sequences.sh
 
@@ -116,7 +116,7 @@ Report file:
 variants_report.tsv
 
 
-### 7️) Primer Mismatch Analysis (PrimerMiner)
+### 7) Primer Mismatch Analysis (PrimerMiner)
 
 07_primerminer_eval.R
 
@@ -210,9 +210,9 @@ Entrez Direct (NCBI E-utilities)
 
 CRABS 0.2.0 
 
-VSEARCH v2.21.1 (Rognes et al. 2016)
+VSEARCH v2.21.1 
 
-Geneious Prime 2026.0.2 
+Geneious Prime 2026.0.2 (https://www.geneious.com)
 
 R (≥4.0)
 
@@ -224,8 +224,10 @@ Biostrings
 
 If you use this workflow, please cite:
 
-Valentini et al. 2016
+Valentini A, Taberlet P, Miaud C, Civade R, Herder J, Thomsen PF, Bellemain E, Besnard A, Coissac E, Boyer F, Gaboriaud C, Jean P, Poulet N, Roset N, Copp GH, Geniez P, Pont D, Argillier C, Baudoin J-M, Peroux T, Crivelli AJ, Olivier A, Acqueberge M, Le Brun M, Møller PR, Willerslev E, Dejean T (2016) Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. Mol Ecol, 25, 929-942. https://doi.org/10.1111/mec.13428
 
-Elbrecht & Leese 2017
+Elbrecht V, Leese F (2017) PrimerMiner: an r package for development and in silico validation of DNA metabarcoding primers. Ecol Evol, 8, 622-626. https://doi.org/10.1111/2041-210X.12687
 
-Jeunen et al. 2023 (CRABS)
+Jeunen GJ, Dowle E, Edgecombe J, von Ammon U, Gemmell NJ, Cross H (2023) crabs-A software program to generate curated reference databases for metabarcoding sequencing data. Mol Ecol Resour, 23, 725-738. https://doi.org/10.1111/1755-0998.13741
+
+Rognes T, Flouri T, Nichols B, Quince C, Mahé F (2016) VSEARCH: a versatile open source tool for metagenomics. PeerJ, 4, e2584. https://doi.org/10.7717/peerj.2584
