@@ -206,7 +206,7 @@ The study also generated the first complete Batra amplicon reference sequence fo
 
 ## Software Requirements
 
-Entrez Direct (NCBI E-utilities)
+Entrez Direct (NCBI E-utilities, https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 
 CRABS 0.2.0 
 
@@ -224,10 +224,13 @@ Biostrings
 
 If you use this workflow, please cite:
 
-Valentini A, Taberlet P, Miaud C, Civade R, Herder J, Thomsen PF, Bellemain E, Besnard A, Coissac E, Boyer F, Gaboriaud C, Jean P, Poulet N, Roset N, Copp GH, Geniez P, Pont D, Argillier C, Baudoin J-M, Peroux T, Crivelli AJ, Olivier A, Acqueberge M, Le Brun M, Møller PR, Willerslev E, Dejean T (2016) Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. Mol Ecol, 25, 929-942. https://doi.org/10.1111/mec.13428
 
 Elbrecht V, Leese F (2017) PrimerMiner: an r package for development and in silico validation of DNA metabarcoding primers. Ecol Evol, 8, 622-626. https://doi.org/10.1111/2041-210X.12687
 
 Jeunen GJ, Dowle E, Edgecombe J, von Ammon U, Gemmell NJ, Cross H (2023) crabs-A software program to generate curated reference databases for metabarcoding sequencing data. Mol Ecol Resour, 23, 725-738. https://doi.org/10.1111/1755-0998.13741
 
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
 Rognes T, Flouri T, Nichols B, Quince C, Mahé F (2016) VSEARCH: a versatile open source tool for metagenomics. PeerJ, 4, e2584. https://doi.org/10.7717/peerj.2584
+
+Valentini A, Taberlet P, Miaud C, Civade R, Herder J, Thomsen PF, Bellemain E, Besnard A, Coissac E, Boyer F, Gaboriaud C, Jean P, Poulet N, Roset N, Copp GH, Geniez P, Pont D, Argillier C, Baudoin J-M, Peroux T, Crivelli AJ, Olivier A, Acqueberge M, Le Brun M, Møller PR, Willerslev E, Dejean T (2016) Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. Mol Ecol, 25, 929-942. https://doi.org/10.1111/mec.13428
