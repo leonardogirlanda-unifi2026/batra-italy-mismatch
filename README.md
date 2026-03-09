@@ -100,11 +100,11 @@ File with the list of species whose sequences contained the target region but la
 complete primer-binding sites required for mismatch analysis.
 
 
-### 4) Taxonomic Assignment (CRABS)
+### 4) Taxonomic metadata retrieval (CRABS)
 
 04_assign_tax.sh
 
-Taxonomy assigned using NCBI taxonomy database.
+Taxonomic data associated with each accession number retrieved using NCBI taxonomy database.
 
 Output:
 
