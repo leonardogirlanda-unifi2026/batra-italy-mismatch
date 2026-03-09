@@ -27,7 +27,14 @@ The objective is to evaluate the technical feasibility of applying the Batra mar
 
 Output:
 
-italian_amphibians_12S.fasta
+1) italian_amphibians_12S.fasta
+
+919 sequences belonging to 50 species.
+
+2) species_missing_no_sequences.txt
+
+Species from the initial target list for which no suitable 12S sequences
+were retrieved from NCBI.
 
 ### 2) In Silico PCR (CRABS)
 
@@ -49,7 +56,14 @@ Default CRABS mismatch threshold: 4.5 mismatches per primer.
 
 Output:
 
-batra_12S_amplicons.fasta
+1) batra_12S_amplicons.fasta
+
+415 records belonging to 36 species.
+
+2) species_no_batra_amplicon.txt
+
+File with the list of species represented in the database but whose sequences did not yield
+a Batra amplicon in the in silico PCR.
 
 ### 3) Recovery of Full Sequences
 
@@ -59,7 +73,7 @@ Accession numbers were extracted and re-downloaded to obtain full mitochondrial 
 
 Output:
 
-batra_full_sequences.fasta
+1) batra_full_sequences.fasta
 
 ### Manual Curation and Primer Validation in Geneious Prime
 
@@ -80,6 +94,11 @@ Final curated dataset:
 408 sequences
 34 species
 
+2) species_incomplete_primer_sites.txt
+
+File with the list of species whose sequences contained the target region but lacked the
+complete primer-binding sites required for mismatch analysis.
+
 
 ### 4) Taxonomic Assignment (CRABS)
 
@@ -89,7 +108,7 @@ Taxonomy assigned using NCBI taxonomy database.
 
 Output:
 
-batra_taxonomy.tsv
+1) batra_taxonomy.tsv
 
 
 ### 5) Dereplication 
@@ -139,7 +158,9 @@ results: Batra_F_eval.tsv Batra_R_eval.tsv Table1_mismatch_summary.tsv
 
 ## Key Results
 
-919 sequences retrieved (50 species)
+919 sequences retrieved from initial query (50 species)
+
+415 sequences amplified the Batra region in the in-silico PCR
 
 408 curated sequences retained
 
