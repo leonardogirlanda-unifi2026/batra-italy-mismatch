@@ -129,7 +129,7 @@ Summary of sequence variants per species.
 
 ### Output
 
-`resultrs/variants_report.tsv`
+`results/variants_report.tsv`
 
 
 ## 8. Primer Mismatch Analysis
