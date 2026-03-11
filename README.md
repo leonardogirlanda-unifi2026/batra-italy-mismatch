@@ -82,8 +82,8 @@ Steps performed:
 
 Sequences were removed if they:
 
-- lacked complete primer-binding sites
-- showed mismatch patterns inconsistent with other sequences of the same species
+- lacked complete primer-binding sites, two species were escluded this way `results/insilico_filtering_results/species_incomplete_primer_sites.txt`
+- showed mismatch patterns inconsistent with other sequences of the same species, two records were discarded this way `results/insilico_filtering_results/accessions_discarded_seq.txt`
 
 ### Final curated dataset
 
