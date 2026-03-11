@@ -92,7 +92,7 @@ Sequences were removed if they:
 
 ### Output
 
-`accessions_final_408.txt`
+`data/accessions_final_408.txt`
 
 `results/insilico_filtering_results/species_incomplete_primer_sites.txt`  
 Species whose sequences contained the target region but **lacked complete primer-binding sites**, preventing mismatch analysis.
