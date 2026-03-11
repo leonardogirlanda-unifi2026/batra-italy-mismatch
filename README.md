@@ -20,9 +20,8 @@ The analysis was conducted in the following steps.
 
 
 ## 1. Reference Sequence Retrieval
-
-Script:  
-`01_ncbi_download.sh`
+ 
+`Scripts/01_ncbi_download.sh`
 
 A list of **53 Italian amphibian taxa** (native + invasive or potentially invasive species) was used to retrieve mitochondrial **12S sequences from NCBI** using Entrez Direct (`esearch`).
 
@@ -41,9 +40,8 @@ Species from the initial target list for which **no suitable 12S sequences were 
 
 
 ## 2. In Silico PCR (CRABS)
-
-Script:  
-`02_crabs_insilico_pcr.sh`
+  
+`Scripts/02_crabs_insilico_pcr.sh`
 
 Sequences were screened using **CRABS** to retain only those predicted to amplify with the **Batra primer pair**:
 
@@ -64,9 +62,8 @@ Species represented in the initial dataset whose sequences **did not yield a Bat
 
 
 ## 3. Recovery of Full Sequences
-
-Script:  
-`03_fetch_full_sequences.sh`
+  
+`Scripts/03_fetch_full_sequences.sh`
 
 Accession numbers of the amplified sequences were extracted and re-downloaded from NCBI to obtain the **full mitochondrial sequences containing primer-binding regions**.
 
@@ -99,9 +96,8 @@ Species whose sequences contained the target region but **lacked complete primer
 
 
 ## 5. Taxonomic Metadata Retrieval
-
-Script:  
-`04_assign_tax.sh`
+  
+`Scripts/04_assign_tax.sh`
 
 Taxonomic information associated with each accession number was retrieved using the **CRABS `--download-taxonomy` option** and the NCBI taxonomy database.
 
@@ -111,9 +107,8 @@ Taxonomic information associated with each accession number was retrieved using 
 
 
 ## 6. Sequence Dereplication
-
-Script:  
-`05_per_species_derep.py`
+  
+`Scripts/05_per_species_derep.py`
 
 Sequences were:
 
@@ -127,9 +122,8 @@ Sequences were:
 
 
 ## 7. Variant Report
-
-Script:  
-`06_variants_report.sh`
+  
+`Scripts/06_variants_report.sh`
 
 Summary of sequence variants per species.
 
@@ -139,9 +133,8 @@ Summary of sequence variants per species.
 
 
 ## 8. Primer Mismatch Analysis
-
-Script:  
-`07_primerminer_eval.R`
+  
+`Scripts/07_primerminer_eval.R`
 
 Primer mismatch scoring was performed using **PrimerMiner** in R.
 
