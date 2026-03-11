@@ -115,7 +115,7 @@ Sequences were:
 - grouped by species
 - dereplicated using **VSEARCH (`--derep_fulllength`)**
 
-### Final dataset
+### Output
 
 100 unique sequence variants  
 34 species
