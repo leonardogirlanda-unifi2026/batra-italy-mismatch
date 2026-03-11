@@ -53,7 +53,7 @@ Batra_Reverse:
 GTAYACTTACCATGTTACGACTT`
 
 
-Default CRABS mismatch threshold: **4.5 mismatches per primer**
+Default CRABS mismatch threshold
 
 ### Output
   
@@ -69,11 +69,6 @@ Script:
 `03_fetch_full_sequences.sh`
 
 Accession numbers of the amplified sequences were extracted and re-downloaded from NCBI to obtain the **full mitochondrial sequences containing primer-binding regions**.
-
-### Output
-
-`batra_full_sequences.fasta`
-
 
 ## 4. Manual Curation and Primer Validation
 
@@ -96,6 +91,8 @@ Sequences were removed if they:
 34 species
 
 ### Output
+
+`accessions_final_408.txt`
 
 `results/insilico_filtering_results/species_incomplete_primer_sites.txt`  
 Species whose sequences contained the target region but **lacked complete primer-binding sites**, preventing mismatch analysis.
