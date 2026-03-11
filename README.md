@@ -1,257 +1,258 @@
 # Technical Assessment of the Batra 12S Primer for Italian Amphibians
 
-This repository contains the full workflow, scripts, and reference datasets used to evaluate the performance of the Batra 12S primer pair (Valentini et al., 2016) for Italian amphibian eDNA metabarcoding.
+This repository contains the workflow, scripts, and datasets used to evaluate the performance of the **Batra 12S primer pair** (Valentini et al., 2016) for Italian amphibian eDNA metabarcoding.
 
 The assessment combines:
--In silico primer-template mismatch analysis
--Reference database curation
--Taxonomic validation
--Sequence dereplication and variant analysis
--PrimerMiner mismatch scoring
 
-The objective is to evaluate the technical feasibility of applying the Batra marker in an Italian context.
+- reference database curation
+- in silico PCR screening
+- primer–template mismatch analysis
+- taxonomic validation
+- sequence dereplication and variant analysis
+- mismatch scoring using PrimerMiner
 
-## Overview of the Workflow:
+The objective is to evaluate the **technical feasibility of applying the Batra marker to Italian amphibian communities**.
 
-### 1) Reference Sequence Retrieval
 
-01_ncbi_download.sh
+# Workflow Overview
 
-53 Italian amphibian taxa (native + invasive/potentially invasive)
+The analysis was conducted in the following steps.
 
--12S mitochondrial sequences downloaded from NCBI using esearch
 
--Query restricted to mitochondrial 12S rRNA regions
+## 1. Reference Sequence Retrieval
 
--Length filter applied (not to retrieve nuclear sequences)
+Script:  
+`01_ncbi_download.sh`
 
-Output:
+A list of **53 Italian amphibian taxa** (native + invasive or potentially invasive species) was used to retrieve mitochondrial **12S sequences from NCBI** using Entrez Direct (`esearch`).
 
-1) italian_amphibians_12S.fasta
+Search filters:
 
-919 sequences belonging to 50 species.
+- mitochondrial records annotated as **12S rRNA**
+- sequence length filter to exclude nuclear fragments
 
-2) species_missing_no_sequences.txt
+### Output
 
-Species from the initial target list for which no suitable 12S sequences
-were retrieved from NCBI.
+`data/accessions_initial_919.txt`  
+919 sequences belonging to **50 species**
 
-### 2) In Silico PCR (CRABS)
+`results/insilico_filtering_results/species_missing_no_sequences.txt`  
+Species from the initial target list for which **no suitable 12S sequences were retrieved from NCBI**
 
-02_crabs_insilico_pcr.sh
 
-Sequences were filtered to retain only those predicted to amplify with the Batra primer pair:
-```
-#Batra_Forward:
+## 2. In Silico PCR (CRABS)
 
+Script:  
+`02_crabs_insilico_pcr.sh`
+
+Sequences were screened using **CRABS** to retain only those predicted to amplify with the **Batra primer pair**:
+
+`Batra_Forward:
 ACACCGCCCGTCACCCT
+Batra_Reverse:
+GTAYACTTACCATGTTACGACTT`
 
 
-#Batra_Reverse:
+Default CRABS mismatch threshold: **4.5 mismatches per primer**
 
-GTAYACTTACCATGTTACGACTT
-```
+### Output
+  
+415 sequences belonging to **36 species**
 
-Default CRABS mismatch threshold: 4.5 mismatches per primer.
+`results/insilico_filtering_results/species_no_batra_amplicon.txt`  
+Species represented in the initial dataset whose sequences **did not yield a Batra amplicon** during in silico PCR
 
-Output:
 
-1) batra_12S_amplicons.fasta
+## 3. Recovery of Full Sequences
 
-415 records belonging to 36 species.
+Script:  
+`03_fetch_full_sequences.sh`
 
-2) species_no_batra_amplicon.txt
+Accession numbers of the amplified sequences were extracted and re-downloaded from NCBI to obtain the **full mitochondrial sequences containing primer-binding regions**.
 
-File with the list of species represented in the database but whose sequences did not yield
-a Batra amplicon in the in silico PCR.
+### Output
 
-### 3) Recovery of Full Sequences
+`batra_full_sequences.fasta`
 
-03_fetch_full_sequences.sh
 
-Accession numbers were extracted and re-downloaded to obtain full mitochondrial sequences containing primer binding sites.
+## 4. Manual Curation and Primer Validation
 
-Output:
+Sequences were manually inspected in **Geneious Prime (v2026.0.2)**.
 
-1) batra_full_sequences.fasta
+Steps performed:
 
-### Manual Curation and Primer Validation in Geneious Prime
+- primer binding tested using *Test with Saved Primers* (≤4 mismatches allowed)
+- sequences aligned using **MAFFT**
+- sequences trimmed to include **amplicon + primer-binding regions**
 
-Sequences were:
+Sequences were removed if they:
 
--uploaded and checked in Geneious Prime
+- lacked complete primer-binding sites
+- showed mismatch patterns inconsistent with other sequences of the same species
 
--Tested for primer binding (using: "test with saved primers", ≤4 mismatches allowed)
+### Final curated dataset
 
--Aligned using MAFFT
-
--Trimmed to include amplicon + primer binding regions
-
-Outlier sequences ( inconsistent mismatch patterns with all the other variants of a species) were manually removed.
-
-Final curated dataset:
-
-408 sequences
+408 sequences  
 34 species
 
-2) species_incomplete_primer_sites.txt
+### Output
 
-File with the list of species whose sequences contained the target region but lacked the
-complete primer-binding sites required for mismatch analysis.
-
-
-### 4) Taxonomic metadata retrieval (CRABS)
-
-04_assign_tax.sh
-
-Taxonomic data associated with each accession number retrieved using NCBI taxonomy database.
-
-Output:
-
-1) batra_taxonomy.tsv
+`results/insilico_filtering_results/species_incomplete_primer_sites.txt`  
+Species whose sequences contained the target region but **lacked complete primer-binding sites**, preventing mismatch analysis.
 
 
-### 5) Dereplication 
+## 5. Taxonomic Metadata Retrieval
 
-05_per_species_derep.py
+Script:  
+`04_assign_tax.sh`
+
+Taxonomic information associated with each accession number was retrieved using the **CRABS `--download-taxonomy` option** and the NCBI taxonomy database.
+
+### Output
+
+`results/batra_taxonomy.tsv`
+
+
+## 6. Sequence Dereplication
+
+Script:  
+`05_per_species_derep.py`
 
 Sequences were:
 
--Grouped by species
+- grouped by species
+- dereplicated using **VSEARCH (`--derep_fulllength`)**
 
--Dereplicated using VSEARCH (--derep_fulllength)
+### Final dataset
 
-Final dataset:
-
-100 unique sequence variants for 34 species.
-
-
-### 6) Variants report
-
-06_variants_report.sh
-
-Report file:
-
-variants_report.tsv
+100 unique sequence variants  
+34 species
 
 
-### 7) Primer Mismatch Analysis (PrimerMiner)
+## 7. Variant Report
 
-07_primerminer_eval.R
+Script:  
+`06_variants_report.sh`
 
-Mismatch scoring performed in R using PrimerMiner.
+Summary of sequence variants per species.
 
-Penalty score thresholds (Elbrecht & Leese 2017):
+### Output
 
-120 → likely non-functional
-
-<60 → compatible with amplification
-
-Observed maximum penalty score:
-
-59.75
-
-No systematic 3′-terminal mismatch accumulation detected.
-
-results: Batra_F_eval.tsv Batra_R_eval.tsv Table1_mismatch_summary.tsv
+`resultrs/variants_report.tsv`
 
 
-## Key Results
+## 8. Primer Mismatch Analysis
 
-919 sequences retrieved from initial query (50 species)
+Script:  
+`07_primerminer_eval.R`
 
-415 sequences amplified the Batra region in the in-silico PCR
+Primer mismatch scoring was performed using **PrimerMiner** in R.
 
-408 curated sequences retained
+Penalty score interpretation (Elbrecht & Leese 2017):
 
-34 species included in final mismatch analysis
+| Penalty score | Interpretation |
+|---------------|---------------|
+| >120 | likely primer failure |
+| <60 | compatible with amplification |
 
-28 native species (4 endemic)
+### Results
 
-6 invasive/potentially invasive species
+Maximum observed penalty score: **59.75**
 
-Most mismatch variation occurred in the reverse primer region
+No systematic accumulation of mismatches near the **3′ primer termini** was detected.
 
-Only two species showed mismatches near the 3′ end (position 5 from 3′)
+### Output
 
-No species exceeded functional mismatch thresholds
+- `results/mismatch_analysis_results/Batra_F_eval.tsv`
+- `results/mismatch_analysis_results/Batra_R_eval.tsv`
+- `results/mismatch_analysis_results/Table1_mismatch_summary.tsv`
 
-The study also generated the first complete Batra amplicon reference sequence for Rana italica, improving database completeness for future applications.
 
-## Repository Structure
+# Key Results
+
+- 919 sequences retrieved from the initial NCBI query (50 species)
+- 415 sequences predicted to amplify the **Batra region**
+- 408 curated sequences retained after manual inspection
+- 34 species included in the final mismatch analysis
+
+Species composition:
+
+- **28 native species** (4 endemic to Italy)
+- **6 invasive or potentially invasive species**
+
+Additional findings:
+
+- most mismatch variation occurred in the **reverse primer-binding region**
+- only two species showed mismatches near the **3′ end** (position 5 from the 3' end)
+- no species exceeded the functional mismatch threshold
+
+
+# Repository Structure
+
+```
+.
 ├── scripts/
-
 │   ├── 01_ncbi_download.sh
-
 │   ├── 02_crabs_insilico_pcr.sh
-
 │   ├── 03_fetch_full_sequences.sh
-
 │   ├── 04_assign_tax.sh
-
 │   ├── 05_per_species_derep.py
-
 │   ├── 06_variants_report.sh
-
-│   ├── 07_primerminer_eval.R
-
+│   └── 07_primerminer_eval.R
+│
 ├── data/
-
 │   ├── Batra_primers.fasta
-
 │   ├── accessions_amplicons_408.txt
-
 │   ├── accessions_manually_discarded.txt
-
 │   ├── accessions_initial_919.txt
-
 │   ├── evaluated_species_34.txt
-
-│   ├── missing_taxa_19.txt
-
-│   ├── species_list_53.txt
-
+│   └── species_list_53.txt
+│
 ├── results/
-
-│   ├── Batra_F_eval.tsv
-
-│   ├── Batra_R_eval.tsv
-
-│   ├── Table1_mismatch_summary.tsv
-
+│   ├── in_silico_filtering_results/
+│   │   ├── species_incomplete_primer_sites.txt
+│   │   ├── species_missing_no_sequences.txt
+│   │   ├── species_no_batra_amplicon.txt
+│   │   ├── mismatch_analysis_results/
+│   │   │   ├── Batra_F_eval.tsv
+│   │   │   ├── Batra_R_eval.tsv
+│   │   │   ├── Table1_mismatch_summary.tsv
 │   ├── batra_taxonomy.tsv
-
-│   ├── variants_report.tsv
-
+│   └── variants_report.tsv
+├── .gitignore
+├── LICENSE
 └── README.md
+```
+# Software Requirements
 
-## Software Requirements
+- Entrez Direct (NCBI E-utilities)  
+  https://www.ncbi.nlm.nih.gov/books/NBK179288/
 
-Entrez Direct (NCBI E-utilities, https://www.ncbi.nlm.nih.gov/books/NBK179288/)
+- CRABS ≥ 0.2.0
 
-CRABS 0.2.0 
+- VSEARCH ≥ 2.21.1
 
-VSEARCH v2.21.1 
+- Geneious Prime 2026.0.2  
+  https://www.geneious.com
 
-Geneious Prime 2026.0.2 (https://www.geneious.com)
+- R ≥ 4.0
 
-R (≥4.0)
+Required R packages:
 
-PrimerMiner
+- PrimerMiner
+- Biostrings
 
-Biostrings
 
-## Citation
+# Citation
 
 If you use this workflow, please cite:
 
+Elbrecht V, Leese F (2017) PrimerMiner: an R package for development and in silico validation of DNA metabarcoding primers. *Ecol Evol* 8:622–626. https://doi.org/10.1111/2041-210X.12687
 
-Elbrecht V, Leese F (2017) PrimerMiner: an r package for development and in silico validation of DNA metabarcoding primers. Ecol Evol, 8, 622-626. https://doi.org/10.1111/2041-210X.12687
+Jeunen GJ et al. (2023) CRABS: a software program to generate curated reference databases for metabarcoding sequencing data. *Mol Ecol Resour* 23:725–738. https://doi.org/10.1111/1755-0998.13741
 
-Jeunen GJ, Dowle E, Edgecombe J, von Ammon U, Gemmell NJ, Cross H (2023) crabs-A software program to generate curated reference databases for metabarcoding sequencing data. Mol Ecol Resour, 23, 725-738. https://doi.org/10.1111/1755-0998.13741
+R Core Team (2021) R: A language and environment for statistical computing. https://www.R-project.org/
 
-R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+Rognes T et al. (2016) VSEARCH: a versatile open source tool for metagenomics. *PeerJ* 4:e2584. https://doi.org/10.7717/peerj.2584
 
-Rognes T, Flouri T, Nichols B, Quince C, Mahé F (2016) VSEARCH: a versatile open source tool for metagenomics. PeerJ, 4, e2584. https://doi.org/10.7717/peerj.2584
-
-Valentini A, Taberlet P, Miaud C, Civade R, Herder J, Thomsen PF, Bellemain E, Besnard A, Coissac E, Boyer F, Gaboriaud C, Jean P, Poulet N, Roset N, Copp GH, Geniez P, Pont D, Argillier C, Baudoin J-M, Peroux T, Crivelli AJ, Olivier A, Acqueberge M, Le Brun M, Møller PR, Willerslev E, Dejean T (2016) Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. Mol Ecol, 25, 929-942. https://doi.org/10.1111/mec.13428
+Valentini A et al. (2016) Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. *Mol Ecol* 25:929–942. https://doi.org/10.1111/mec.13428
