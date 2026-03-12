@@ -202,11 +202,11 @@ Additional findings:
 │   ├── in_silico_filtering_results/
 │   │   ├── species_incomplete_primer_sites.txt
 │   │   ├── species_missing_no_sequences.txt
-│   │   ├── species_no_batra_amplicon.txt
-│   │   ├── mismatch_analysis_results/
-│   │   │   ├── Batra_F_eval.tsv
-│   │   │   ├── Batra_R_eval.tsv
-│   │   │   ├── Table1_mismatch_summary.tsv
+│   │   └── species_no_batra_amplicon.txt
+│   ├── mismatch_analysis_results/
+│   │   ├── Batra_F_eval.tsv
+│   │   ├── Batra_R_eval.tsv
+│   │   └── Table1_mismatch_summary.tsv
 │   ├── batra_taxonomy.tsv
 │   └── variants_report.tsv
 ├── .gitignore
