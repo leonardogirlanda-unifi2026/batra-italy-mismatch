@@ -4,7 +4,7 @@ This repository contains the workflow, scripts, and datasets used to evaluate th
 
 The assessment combines:
 
-- reference database curation
+- database curation
 - in silico PCR screening
 - primer–template mismatch analysis
 - taxonomic validation
@@ -19,7 +19,7 @@ The objective is to evaluate the **technical feasibility of applying the Batra m
 The analysis was conducted in the following steps.
 
 
-## 1. Reference Sequence Retrieval
+## 1. Sequence Retrieval
  
 `Scripts/01_ncbi_download.sh`
 
