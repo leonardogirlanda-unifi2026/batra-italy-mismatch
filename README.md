@@ -18,12 +18,58 @@ The objective is to evaluate the **technical feasibility of applying the Batra m
 
 The analysis was conducted in the following steps.
 
+## Reviewer-facing audit resources
+
+The original accession and species lists are retained unchanged. Two summary
+tables are generated from them with:
+
+```bash
+python3 Scripts/08_build_review_tables.py
+```
+
+`results/species_screening_summary.tsv` reports, for every taxon in the target
+list, whether it was evaluated, yielded no retrieved sequence, yielded no Batra
+amplicon, was represented only by sequences with incomplete primer-binding
+sites, or is awaiting a targeted sequence re-check. Query names and accepted names are kept in separate columns so that
+taxonomic-name changes do not break the link to the original search.
+Historical combinations used for sequence retrieval are recorded in
+`data/taxon_name_overrides.tsv` but are not counted as separate target taxa.
+
+`results/targeted_sequence_audit.tsv` records the outcomes of the targeted
+NCBI Nucleotide re-checks requested during revision. For *Hyla perrini*, a
+search without the 30,000-bp upper-length restriction returned no mitochondrial
+12S record; mitochondrial cytochrome records found in a broader organism search
+were not relevant to the Batra target and were not included.
+For *Ichthyosaura apuana*, searches using the accepted name and historical
+combinations likewise returned no record that could be attributed to the taxon
+without ambiguity. The complete mitogenome EU880335.1 remains assigned to
+*I. alpestris*: its voucher MVZ:Herp:232177 was collected in Adlikon, Zurich,
+Switzerland, and was not reassigned to the newly recognized Italian taxon.
+For *Hyla sarda* and *Salamandrina perspicillata*, the outcomes of the original
+50--30,000-bp retrieval and screening workflow were retained. No expanded
+search without the upper-length restriction was performed during revision;
+the former remains classified as having incomplete primer-binding sites and
+the latter as yielding no Batra amplicon in the original in silico PCR.
+
+`results/accession_flow.tsv` reports all unique accessions occurring in the
+initial list, their number of initial occurrences, and whether they were
+retained or manually discarded. The intermediate list of 415 accessions that
+passed CRABS is not currently available in the repository. Consequently,
+accessions that are neither final nor manually discarded are conservatively
+labelled `not_retained_stage_unresolved_without_415_list`. If
+`data/accessions_after_crabs_415.txt` is added later, rerunning the same script
+will resolve the CRABS stage automatically.
+
+`results/review_audit_report.txt` records counts, missing resources, and the
+outcome of automated consistency checks. The generated tables do not replace
+or modify the original lists.
+
 
 ## 1. Sequence Retrieval
  
 `Scripts/01_ncbi_download.sh`
 
-A list of **53 Italian amphibian taxa** (native + invasive or potentially invasive species) was used to retrieve mitochondrial **12S sequences from NCBI** using Entrez Direct (`esearch`).
+The original analysis used a list of **53 amphibian taxa** (native + invasive or potentially invasive species). Following reviewer comments, *Hyla perrini* and *Ichthyosaura apuana* were added to the target list, bringing the working revision list to **55 taxa**. Non-native taxa were retained at this stage. The list was used to retrieve mitochondrial **12S sequences from NCBI** using Entrez Direct (`esearch`).
 
 Search filters:
 
@@ -33,7 +79,7 @@ Search filters:
 ### Output
 
 `data/accessions_initial_919.txt`  
-919 sequences belonging to **50 species**
+919 accession occurrences (902 unique accession numbers) belonging to **50 species**
 
 `results/insilico_filtering_results/species_missing_no_sequences.txt`  
 Species from the initial target list for which **no suitable 12S sequences were retrieved from NCBI**
@@ -79,7 +125,7 @@ Steps performed:
 
 Sequences were removed if they:
 
-- lacked complete primer-binding sites, two species were escluded this way `results/insilico_filtering_results/species_incomplete_primer_sites.txt`
+- lacked complete primer-binding sites; two species were excluded this way (`results/insilico_filtering_results/species_incomplete_primer_sites.txt`)
 - showed mismatch patterns inconsistent with other sequences of the same species, two records were discarded this way `results/insilico_filtering_results/accessions_discarded_seq.txt`
 
 ### Final curated dataset
@@ -167,7 +213,7 @@ No systematic accumulation of mismatches near the **3′ primer termini** was de
 
 Species composition:
 
-- **28 native species** (4 endemic to Italy)
+- **28 native species** (4 classified as endemic in the original analysis)
 - **6 invasive or potentially invasive species**
 
 Additional findings:
@@ -181,33 +227,39 @@ Additional findings:
 
 ```
 .
-├── scripts/
+├── Scripts/
 │   ├── 01_ncbi_download.sh
 │   ├── 02_crabs_insilico_pcr.sh
 │   ├── 03_fetch_full_sequences.sh
 │   ├── 04_assign_tax.sh
 │   ├── 05_per_species_derep.py
 │   ├── 06_variants_report.sh
-│   └── 07_primerminer_eval.R
+│   ├── 07_primerminer_eval.R
+│   └── 08_build_review_tables.py
 │
 ├── data/
 │   ├── Batra_primers.fasta
-│   ├── accessions_amplicons_408.txt
-│   ├── accessions_manually_discarded.txt
+│   ├── accessions_final_408.txt
 │   ├── accessions_initial_919.txt
 │   ├── evaluated_species_34.txt
-│   └── species_list_53.txt
+│   ├── species_list_55.txt
+│   └── taxon_name_overrides.tsv
 │
 ├── results/
 │   ├── in_silico_filtering_results/
+│   │   ├── accessions_discarded_seq.txt
 │   │   ├── species_incomplete_primer_sites.txt
 │   │   ├── species_missing_no_sequences.txt
-│   │   └── species_no_batra_amplicon.txt
+│   │   ├── species_no_batra_amplicon.txt
+│   │   └── species_pending_sequence_audit.txt
 │   ├── mismatch_analysis_results/
 │   │   ├── Batra_F_eval.tsv
 │   │   ├── Batra_R_eval.tsv
 │   │   └── Table1_mismatch_summary.tsv
+│   ├── accession_flow.tsv
 │   ├── batra_taxonomy.tsv
+│   ├── review_audit_report.txt
+│   ├── species_screening_summary.tsv
 │   └── variants_report.tsv
 ├── .gitignore
 ├── LICENSE

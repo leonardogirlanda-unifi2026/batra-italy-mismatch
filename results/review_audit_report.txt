@@ -1,0 +1,17 @@
+Reviewer-resource audit report
+==============================
+
+Target taxa: 55
+  evaluated: 34
+  incomplete_primer_binding_sites: 2
+  no_batra_amplicon: 14
+  no_sequences_retrieved: 5
+
+Initial accession occurrences: 919
+Unique initial accessions: 902
+Duplicate initial occurrences: 17
+Unique accessions after CRABS: not available (add data/accessions_after_crabs_415.txt to resolve this stage)
+Unique final accessions: 408
+Manually discarded accessions: 2
+
+Automated consistency checks: PASS
