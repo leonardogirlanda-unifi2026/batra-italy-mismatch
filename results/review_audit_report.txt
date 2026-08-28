@@ -10,8 +10,8 @@ Target taxa: 55
 Initial accession occurrences: 919
 Unique initial accessions: 902
 Duplicate initial occurrences: 17
-Unique accessions after CRABS: not available (add data/accessions_after_crabs_415.txt to resolve this stage)
+Unique accessions after CRABS: not available in the current repository
 Unique final accessions: 408
 Manually discarded accessions: 2
 
-Automated consistency checks: PASS
+Consistency checks: PASS
