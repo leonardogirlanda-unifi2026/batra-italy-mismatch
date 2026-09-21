@@ -8,7 +8,7 @@ Bufo spinosus	Bufo spinosus	evaluated	data/evaluated_species_34.txt
 Bufotes balearicus	Bufotes balearicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
 Bufotes viridis	Bufotes viridis	evaluated	data/evaluated_species_34.txt	
 Bufotes boulengeri	Bufotes boulengeri	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Bufotes siculus	Bufotes siculus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	
+Bufotes siculus	Bufotes boulengeri siculus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	Original query name retained in the target list; accepted trinomial used in the revised manuscript.
 Discoglossus pictus	Discoglossus pictus	evaluated	data/evaluated_species_34.txt	
 Discoglossus sardus	Discoglossus sardus	evaluated	data/evaluated_species_34.txt	
 Dyscophus antongilii	Dyscophus antongilii	evaluated	data/evaluated_species_34.txt	
