@@ -1,0 +1,22 @@
+Group	Family	Species	BAR	BIA	FRA	NOV	STA	CANA	MER	PET
+Birds	Anatidae	Anas platyrhynchos	0	0	2095	0	0	0	0	0
+Fish	Anguillidae	Anguilla anguilla	0	0	2104	0	0	574	0	893
+Fish	Cyprinidae	Barbus plebejus	0	0	0	0	0	370	0	0
+Amphibians	Bufonidae	Bufo bufo	497	0	23939	2990	1776	39742	0	10371
+Amphibians	Bufonidae	Bufo spinosus	0	0	0	0	0	16	0	0
+Amphibians	Bufonidae	Bufotes viridis	0	0	822	0	0	0	0	0
+Mammals	Canidae	Canis lupus	0	0	0	24	0	81	0	82
+Birds	Cinclidae	Cinclus cinclus	1162	0	0	0	0	0	0	475
+Birds	Columbidae	Columba palumbus	13	0	425	0	0	0	0	137
+Birds	Muscicapidae	Erithacus rubecula	0	0	0	0	336	0	0	0
+Mammals	Gliridae	Muscardinus avellanarius	0	0	751	0	0	0	342	0
+Fish	Salmonidae	Oncorhynchus sp.	923	0	0	0	1237	0	0	0
+Birds	Paridae	Parus major	0	0	0	0	0	587	0	0
+Fish	Cyprinidae	Pseudorasbora parva	332	0	480	7056	0	0	0	0
+Amphibians	Ranidae	Rana italica	4118	0	633	0	3053	2949	0	2196
+Fish	Cyprinidae	Rutilus sp.	0	0	113	1367	0	0	0	0
+Amphibians	Salamandridae	Salamandrina perspicillata	0	4854	2839	0	0	486	34910	323
+Fish	Salmonidae	Salmo sp.	565	0	8076	601	20006	0	0	1856
+Fish	Salmonidae	Salmo trutta	17972	0	5922	6399	3660	0	0	496
+Fish	Cyprinidae	Squalius sp.	345	0	1442	8156	2654	0	0	0
+Birds	Turdidae	Turdus philomelos	0	0	0	0	120	0	0	0
