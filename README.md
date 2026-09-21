@@ -12,21 +12,21 @@ The repository is divided into an **in silico primer-assessment workflow** and a
 
 | Component | Released result |
 | --- | ---: |
-| Target taxa in the revision list | 55 |
-| Taxa evaluated in the final mismatch analysis | 34 |
+| Target taxa documented in Italy | 50 |
+| Taxa evaluated in the final mismatch analysis | 29 |
 | Taxa with incomplete primer-binding sites | 2 |
 | Taxa with no Batra amplicon in the original in silico PCR | 14 |
 | Taxa with no suitable sequence retrieved | 5 |
 | Initial NCBI accession occurrences | 919 (902 unique) |
 | Sequences reported after CRABS screening | 415, representing 36 taxa |
-| Curated accessions retained for mismatch analysis | 408 |
-| Unique sequence variants | 100 |
+| Curated accessions retained for mismatch analysis | 271 |
+| Unique sequence variants | 80 |
 | Empirical paired-end libraries | 62 (124 FASTQ files) |
 | Raw read pairs | 2,083,452 |
 | Taxa in the released site-level ASV table | 21 (5 amphibian and 16 non-target vertebrate taxa) |
 | Reads represented in the released ASV table | 236,743 |
 
-The working revision list contains the 53 taxa used in the original retrieval plus *Hyla perrini* and *Ichthyosaura apuana*. Selected non-native or non-Italian taxa were retained as technical comparators. Their inclusion should not be interpreted as a current national distribution record or as a formal classification under invasive-alien-species legislation.
+The final analytical scope comprises taxa documented as naturally occurring or naturalized in Italy. The revision added *Hyla perrini* and *Ichthyosaura apuana* and excluded five non-Italian taxa that had originally been included as technical comparators: *Ambystoma tigrinum*, *Bombina orientalis*, *Dyscophus antongilii*, *Epidalea calamita* and *Triturus cristatus*. Naturalized non-native taxa documented in Italy were retained because they are relevant to biodiversity monitoring. The original broader lists and outputs remain available as explicitly labelled provenance files.
 
 ## Repository contents
 
@@ -45,13 +45,17 @@ The working revision list contains the 53 taxa used in the original retrieval pl
 ├── data/
 │   ├── Batra_primers.fasta
 │   ├── species_list_53.txt
-│   ├── species_list_55.txt
+│   ├── species_list_50.txt
+│   ├── species_list_original_55_with_comparators.txt
 │   ├── taxon_name_overrides.tsv
 │   ├── accessions_initial_919.txt
-│   ├── accessions_final_408.txt
-│   └── evaluated_species_34.txt
+│   ├── accessions_final_271.txt
+│   ├── accessions_final_original_408.txt
+│   ├── evaluated_species_29.txt
+│   └── evaluated_species_original_34.txt
 ├── results/
 │   ├── species_screening_summary.tsv
+│   ├── excluded_non_italian_comparators.tsv
 │   ├── targeted_sequence_audit.tsv
 │   ├── accession_flow.tsv
 │   ├── review_audit_report.txt
@@ -78,7 +82,9 @@ The raw FASTQ files are available from the corresponding author upon reasonable 
 
 ### 1. Define the biological scope
 
-The original analysis started from [`data/species_list_53.txt`](data/species_list_53.txt). The revision list in [`data/species_list_55.txt`](data/species_list_55.txt) adds *H. perrini* and *I. apuana*. Query names, accepted names and historical combinations are kept separate in [`data/taxon_name_overrides.tsv`](data/taxon_name_overrides.tsv), preventing a nomenclatural change from breaking the link to the original retrieval.
+The original analysis started from [`data/species_list_53.txt`](data/species_list_53.txt). During revision, *H. perrini* and *I. apuana* were added and five non-Italian technical comparators were removed. The current one-name-per-line target list is [`data/species_list_50.txt`](data/species_list_50.txt). The intermediate 55-taxon list is retained as [`data/species_list_original_55_with_comparators.txt`](data/species_list_original_55_with_comparators.txt), and the scope exclusions are documented in [`results/excluded_non_italian_comparators.tsv`](results/excluded_non_italian_comparators.tsv).
+
+The scope criterion is occurrence in Italy, not native status alone. Consequently, naturalized non-native taxa documented in Italy remain in the assessment. Query names, accepted names and historical combinations are kept separate in [`data/taxon_name_overrides.tsv`](data/taxon_name_overrides.tsv), preventing a nomenclatural change from breaking the link to the original retrieval.
 
 When adapting the workflow, create a one-name-per-line target list and decide in advance whether it represents:
 
@@ -111,7 +117,7 @@ Forward: ACACCGCCCGTCACCCT
 Reverse: GTAYACTTACCATGTTACGACTT
 ```
 
-The study reports 415 sequences representing 36 taxa after this step. The intermediate list of 415 accessions is not available in the repository; consequently, entries that are absent from both the final and manually discarded lists are labelled conservatively in [`results/accession_flow.tsv`](results/accession_flow.tsv).
+The original broader screening reported 415 sequences representing 36 taxa after this step. This count is retained as workflow provenance because the complete intermediate accession list is not available. The final Italy-scope mismatch dataset was produced by removing the five documented comparator taxa from the curated results. Entries that are absent from both the original final and manually discarded lists are labelled conservatively in [`results/accession_flow.tsv`](results/accession_flow.tsv).
 
 Taxa for which the original screening returned no predicted Batra amplicon are listed in [`results/insilico_filtering_results/species_no_batra_amplicon.txt`](results/insilico_filtering_results/species_no_batra_amplicon.txt).
 
@@ -127,7 +133,7 @@ Taxa for which the original screening returned no predicted Batra amplicon are l
 
 Two affected taxa are recorded in [`species_incomplete_primer_sites.txt`](results/insilico_filtering_results/species_incomplete_primer_sites.txt), and the two manually discarded accessions are recorded in [`accessions_discarded_seq.txt`](results/insilico_filtering_results/accessions_discarded_seq.txt).
 
-The final accession list contains 408 records representing 34 taxa: [`data/accessions_final_408.txt`](data/accessions_final_408.txt).
+The final Italy-scope accession list contains 271 records representing 29 taxa: [`data/accessions_final_271.txt`](data/accessions_final_271.txt). The previously released broader list of 408 records is retained as [`data/accessions_final_original_408.txt`](data/accessions_final_original_408.txt).
 
 ### 5. Retrieve taxonomy and dereplicate within species
 
@@ -158,12 +164,14 @@ The maximum observed penalty score was 59.75. No taxon exceeded the score of 120
 
 ### 7. Document the fate of every target taxon
 
-[`results/species_screening_summary.tsv`](results/species_screening_summary.tsv) assigns each of the 55 revision taxa to one mutually exclusive outcome:
+[`results/species_screening_summary.tsv`](results/species_screening_summary.tsv) assigns each of the 50 Italy-scope target taxa to one mutually exclusive outcome:
 
 - evaluated in the mismatch analysis;
 - incomplete primer-binding sites;
 - no Batra amplicon in the original in silico PCR;
 - no suitable sequence retrieved.
+
+[`results/excluded_non_italian_comparators.tsv`](results/excluded_non_italian_comparators.tsv) lists the five taxa removed during revision and reports their original sequence and variant counts. The current PrimerMiner tables and Table 1 summary contain only the 29 evaluated taxa retained within the Italian scope; the corresponding broader-scope outputs are preserved with `_original_34_taxa` in their filenames.
 
 [`results/targeted_sequence_audit.tsv`](results/targeted_sequence_audit.tsv) records the targeted revision checks for *H. perrini* and *I. apuana* and retains the original workflow outcomes for *H. sarda* and *Salamandrina perspicillata*.
 
@@ -219,6 +227,8 @@ The two occurrences of PP471678 are retained as separate manifest rows so that t
 
 The manifest describes the amphibian reference component only. Non-target vertebrate ASVs were investigated during downstream curation with BLAST; the corresponding non-target reference records are not part of this list. It should therefore not be interpreted as a universal vertebrate reference database.
 
+The empirical assignment database is intentionally broader than the in silico mismatch assessment. Records belonging to taxa excluded from the Italy-focused mismatch analysis remain listed in the manifest because the database used for sequence assignment was not retrospectively altered.
+
 ### ASV table
 
 The final taxon-by-site table is provided in both Excel and machine-readable TSV formats:
@@ -248,7 +258,7 @@ The sequence below is the minimum recommended adaptation path.
 
 | Component | Batra example | Change for a new primer |
 | --- | --- | --- |
-| Target taxa | `data/species_list_55.txt` | Supply the relevant checklist and comparator categories |
+| Target taxa | `data/species_list_50.txt` | Supply the relevant regional checklist and document any broader comparator set separately |
 | Locus search | Mitochondrial 12S terms | Replace with the target locus and known annotation synonyms |
 | Record-length filter | 50–30,000 bp | Set bounds that retain complete marker and primer sites |
 | Primer sequences | Batra forward/reverse | Replace in CRABS, the primer FASTA, PrimerMiner and Barque |
@@ -280,7 +290,7 @@ The numbered scripts preserve the main command sequence, but some transitions de
 Before running the first script from a separate analysis directory, provide its expected one-name-per-line input:
 
 ```bash
-cp /path/to/this/repository/data/species_list_55.txt lista_anfibi.txt
+cp /path/to/this/repository/data/species_list_50.txt lista_anfibi.txt
 bash /path/to/this/repository/Scripts/01_ncbi_download.sh
 ```
 
@@ -290,6 +300,7 @@ Subsequent scripts expect the output names documented in their source. Review ea
 
 - NCBI retrieval covered assembled Nucleotide records, not raw SRA reads.
 - The list of 415 post-CRABS accessions was not available for release; this stage remains unresolved at accession level in `accession_flow.tsv`.
+- The counts of 919 retrieved records and 415 post-CRABS sequences describe the original broader workflow. The final mismatch tables and summary statistics use the Italy-scope subset of 271 sequences from 29 taxa.
 - Several steps depend on manual Geneious inspection and curated FASTA alignments that cannot be regenerated from accession lists alone.
 - No comparative 16S analysis or degenerate-primer redesign was performed.
 - The targeted revision searches did not recover a suitable Batra-region reference for *H. perrini* or an unambiguously attributable reference for *I. apuana*.
