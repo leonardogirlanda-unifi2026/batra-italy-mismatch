@@ -64,17 +64,15 @@ The working revision list contains the 53 taxa used in the original retrieval pl
     │   ├── barque_config_BATRA.sh
     │   └── primers.csv
     ├── reference_database/
-    │   ├── BATRA_amphibian_reference_public.fasta
-    │   └── reference_database_release_notes.tsv
+    │   └── reference_database_manifest.tsv
     ├── results/
     │   ├── INNATURA_ASV_table_corrected.xlsx
     │   └── INNATURA_ASV_table_corrected.tsv
     ├── raw_reads_manifest.tsv
-    ├── raw_reads_summary.tsv
-    └── raw_reads_archive_SHA256.txt
+    └── raw_reads_summary.tsv
 ```
 
-The raw FASTQ files are distributed as a GitHub Release asset rather than being committed to the Git history. See [Raw reads and release files](#raw-reads-and-release-files).
+The raw FASTQ files are available from the corresponding author upon reasonable request. Their filenames, library roles, read counts and checksums are documented in the repository. See [Raw reads and metadata](#raw-reads-and-metadata).
 
 ## Part I: in silico primer assessment
 
@@ -175,7 +173,7 @@ The maximum observed penalty score was 59.75. No taxon exceeded the score of 120
 
 The field dataset comprised eight stream sampling locations within two Natura 2000 areas in north-western Italy. At each location, six 1 L water samples were collected along a 50 m transect. Field blanks were processed in parallel. DNA extractions were amplified in technical triplicate with the Batra primers, and pooled products were indexed and sequenced on an Illumina MiSeq using 2 × 150 bp reads.
 
-The released raw-data package contains:
+The raw-data manifest documents:
 
 - 48 field-sample libraries;
 - 8 field blanks;
@@ -210,16 +208,16 @@ The Barque workflow includes Trimmomatic filtering, FLASH read merging, chimera 
 
 ### Empirical reference database
 
-[`empirical/reference_database/BATRA_amphibian_reference_public.fasta`](empirical/reference_database/BATRA_amphibian_reference_public.fasta) is the public-release version of the amphibian component supplied for the empirical analysis. It contains 90 records.
+The sequence records and species included in the empirical amphibian reference are listed in [`empirical/reference_database/reference_database_manifest.tsv`](empirical/reference_database/reference_database_manifest.tsv). The manifest reports the original database record identifier, taxon label, record source and sequence length. For public records, it also reports the GenBank accession, which can be used to retrieve the corresponding record from NCBI Nucleotide.
 
-Three internal records were omitted because their sequences are identical to retained public GenBank records:
+The working reference contained 94 record occurrences: 91 public GenBank records (90 unique accessions) and three in-house records. For traceability, the manifest records that:
 
 - `RS3-Batr01_Bufotes-viridis` and `RS7-Batr01_Bufotes-viridis` are identical to FJ882813;
 - `Rit2-Batr01_Rana-italica` is identical to PQ758684.
 
-One exact duplicate occurrence of PP471678 was also removed. These operations do not remove a unique sequence variant. All changes are documented in [`reference_database_release_notes.tsv`](empirical/reference_database/reference_database_release_notes.tsv).
+The two occurrences of PP471678 are retained as separate manifest rows so that the table reflects the composition of the working reference exactly. The manifest contains record-level metadata rather than nucleotide strings.
 
-The released FASTA contains amphibian references only. Non-target vertebrate ASVs were investigated during downstream curation with BLAST; the corresponding non-target reference records are not included in this FASTA. The file should therefore not be presented as a universal vertebrate reference database.
+The manifest describes the amphibian reference component only. Non-target vertebrate ASVs were investigated during downstream curation with BLAST; the corresponding non-target reference records are not part of this list. It should therefore not be interpreted as a universal vertebrate reference database.
 
 ### ASV table
 
@@ -236,16 +234,11 @@ The public copy corrects three taxonomic labels without changing any read count:
 
 The table reports 236,743 reads assigned to 21 reportable vertebrate taxa across the eight site codes. The manuscript reports 236,763 reads after filtering, denoising and decontamination. The 20-read difference is consistent with the table note that human sequences and potential contaminants were omitted, but the unavailable per-ASV intermediate table prevents independent attribution of those 20 reads. Both totals are retained here to keep the reporting transparent.
 
-## Raw reads and release files
+## Raw reads and metadata
 
-The raw FASTQ files and checksum are available in the GitHub Release [`empirical-data-v1`](https://github.com/leonardogirlanda-unifi2026/batra-italy-mismatch/releases/tag/empirical-data-v1):
+The raw FASTQ files are not included in this repository and are available from the corresponding author upon reasonable request.
 
-- `raw_reads_batra.zip` contains the 124 compressed FASTQ files, the manifest and the summary;
-- `SHA256SUMS.txt` verifies the downloaded archive.
-
-The same manifest is tracked in [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv). It records library role, site code, read direction, read count and SHA-256 checksum for every FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides totals by library role.
-
-The expected SHA-256 checksum for `raw_reads_batra.zip` is also stored in [`empirical/raw_reads_archive_SHA256.txt`](empirical/raw_reads_archive_SHA256.txt).
+[`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) records the library role, site code, read direction, filename, read count and SHA-256 checksum for every FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides totals by library role. These metadata allow the requested files to be checked against the dataset used in the study.
 
 ## Adapting the workflow to another primer pair
 
@@ -287,7 +280,7 @@ The numbered scripts preserve the main command sequence, but some transitions de
 Before running the first script from a separate analysis directory, provide its expected one-name-per-line input:
 
 ```bash
-cp /path/to/this/repository/data/species_list_53.txt lista_anfibi.txt
+cp /path/to/this/repository/data/species_list_55.txt lista_anfibi.txt
 bash /path/to/this/repository/Scripts/01_ncbi_download.sh
 ```
 
@@ -300,7 +293,8 @@ Subsequent scripts expect the output names documented in their source. Review ea
 - Several steps depend on manual Geneious inspection and curated FASTA alignments that cannot be regenerated from accession lists alone.
 - No comparative 16S analysis or degenerate-primer redesign was performed.
 - The targeted revision searches did not recover a suitable Batra-region reference for *H. perrini* or an unambiguously attributable reference for *I. apuana*.
-- The empirical public FASTA contains the amphibian component only and should not be used as a complete vertebrate database.
+- The empirical reference manifest describes the amphibian component only and should not be used as a complete vertebrate database.
+- Raw sequencing reads are available from the corresponding author upon reasonable request and are not deposited in this public repository.
 - The field dataset has limited spatial and temporal coverage. Non-detection in these samples should not be interpreted as evidence of species absence or primer failure.
 
 ## Software
