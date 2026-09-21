@@ -2,13 +2,17 @@ Family	Species	n refseq	n Batra seq	n variants	Major variant	MAX mismatch	Mismat
 							Batra F	Batra R	Batra F	Batra R
 Alytidae	Discoglossus pictus	24	3	2	2	0	-	-	0	0
 Alytidae	Discoglossus sardus	15	6	2	4	0	-	-	0	0
+Ambystomatidae	Ambystoma tigrinum	4	3	2	2	1	-	-	0	12,4
+Bombinatoridae	Bombina orientalis	134	122	15	40	0	-	-	0	0
 Bombinatoridae	Bombina pachypus	4	3	2	2	0	-	-	0	0
 Bombinatoridae	Bombina variegata	21	10	2	6	0	-	-	0	0
 Bufonidae	Bufo bufo	7	4	2	3	0	-	-	0	0
 Bufonidae	Bufo spinosus	5	3	1	3	1	-	-	0	5,6
 Bufonidae	Bufotes viridis	39	4	3	2	0	-	-	0	0
+Bufonidae	Epidalea calamita	13	5	1	5	0	-	-	0	0
 Hylidae	Hyla arborea	13	3	1	3	1	-	-	0	6,95
 Hylidae	Hyla meridionalis	7	3	1	3	1	-	-	0	6,95
+Microhylidae	Dyscophus antongilii	4	2	1	2	2	-	-	0	25,4
 Pelobatidae	Pelobates fuscus	11	3	2	2	1	yes	-	59,75	0
 Pelodytidae	Pelodytes punctatus	12	5	2	3	1	yes	-	59,75	0
 Pipidae	Xenopus laevis	77	10	5	5	2	-	-	0	12,55
@@ -29,3 +33,4 @@ Salamandridae	Salamandra lanzai	6	3	1	3	1	-	-	0	18,6
 Salamandridae	Salamandra salamandra	83	32	10	17	1	-	-	0	18,6
 Salamandridae	Salamandrina terdigitata	13	1	1	1	1	-	-	0	12,4
 Salamandridae	Triturus carnifex	3	2	1	2	1	-	-	0	12,4
+Salamandridae	Triturus cristatus	5	5	1	5	1	-	-	0	12,4
