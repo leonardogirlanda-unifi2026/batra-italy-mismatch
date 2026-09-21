@@ -1,0 +1,6 @@
+library_role	n_libraries	read_pairs
+field_sample	48	1663780
+field_blank	8	243684
+pcr_negative_control	3	63292
+positive_control	3	112696
+total	62	2083452
