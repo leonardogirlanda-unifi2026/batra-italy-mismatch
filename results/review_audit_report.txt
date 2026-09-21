@@ -1,17 +1,26 @@
 Reviewer-resource audit report
 ==============================
 
-Target taxa: 55
-  evaluated: 34
+Current Italy-scope target taxa: 50
+  evaluated in the final mismatch analysis: 29
   incomplete_primer_binding_sites: 2
   no_batra_amplicon: 14
   no_sequences_retrieved: 5
 
-Initial accession occurrences: 919
-Unique initial accessions: 902
-Duplicate initial occurrences: 17
-Unique accessions after CRABS: not available in the current repository
-Unique final accessions: 408
-Manually discarded accessions: 2
+Scope restriction applied during revision:
+  non-Italian comparator taxa excluded: 5
+  original broader final mismatch dataset: 408 sequences, 34 taxa, 100 variants
+  current Italy-scope final mismatch dataset: 271 sequences, 29 taxa, 80 variants
 
-Consistency checks: PASS
+Historical workflow counts retained for provenance:
+  initial accession occurrences: 919 (902 unique)
+  post-CRABS sequences: 415, representing 36 taxa
+  post-CRABS accession list: not available
+
+Current consistency checks: PASS
+  species_screening_summary.tsv: 50 target rows
+  accessions_final_271.txt: 271 rows
+  evaluated_species_29.txt: 29 rows
+  Table1_mismatch_summary.tsv: 29 data rows
+  Batra_F_eval.tsv: 80 variant rows
+  Batra_R_eval.tsv: 80 variant rows

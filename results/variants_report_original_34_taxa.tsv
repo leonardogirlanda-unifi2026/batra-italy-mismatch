@@ -1,5 +1,7 @@
 species	n_sequences	n_variants	max_variant_count
+Ambystoma_tigrinum	3	2	2
 Aquarana_catesbeiana	22	3	19
+Bombina_orientalis	123	16	40
 Bombina_pachypus	3	2	2
 Bombina_variegata	10	2	6
 Bufo_bufo	4	2	3
@@ -7,6 +9,8 @@ Bufo_spinosus	3	1	3
 Bufotes_viridis	4	3	2
 Discoglossus_pictus	3	2	2
 Discoglossus_sardus	6	2	4
+Dyscophus_antongilii	2	1	2
+Epidalea_calamita	5	1	5
 Euproctus_platycephalus	1	1	1
 Hyla_arborea	3	1	3
 Hyla_meridionalis	3	1	3
@@ -27,4 +31,5 @@ Salamandra_lanzai	3	1	3
 Salamandra_salamandra	32	10	17
 Salamandrina_terdigitata	1	1	1
 Triturus_carnifex	2	1	2
-Xenopus_laevis	10	5	5
+Triturus_cristatus	5	1	5
+Xenopus_laevis	11	6	5
