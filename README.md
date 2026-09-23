@@ -58,7 +58,7 @@ Reverse: GTAYACTTACCATGTTACGACTT
 
 ### Retrieve mitochondrial records
 
-[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) The query searches mitochondrial records between 50 and 30,000 bp. It retrieves short and long records annotated with 12S-related terms, and additionally retains mitochondrial records between 5,000 and 30,000 bp even when their NCBI annotation does not contain a 12S term.
+[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) The query searches mitochondrial records between 50 and 30,000 bp using Entrez Direct (Kans, 2013). It retrieves short and long records annotated with 12S-related terms, and additionally retains mitochondrial records between 5,000 and 30,000 bp even when their NCBI annotation does not contain a 12S term.
 
 The query operates on assembled NCBI Nucleotide records. It does not search raw reads deposited only in the Sequence Read Archive.
 
@@ -66,9 +66,9 @@ The retrieved accession occurrences are listed in [`data/accessions_initial_781.
 
 ### Screen, curate and dereplicate sequences
 
-[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS using the `batra` primer pair and an error value of 4.5 mismatches for each primers (default setting). [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
+[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS (Jeunen et al., 2023) using the `batra` primer pair and an error value of 4.5 mismatches for each primers (default setting). [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
 
-The retained records were then aligned and inspected manually in Geneious Prime. Sequences were excluded from mismatch scoring when they lacked the complete `batra` amplicon or either primer-binding region. Records with primer-binding mismatches inconsistent with other sequences of the same species were also excluded as probable sequencing or annotation errors.
+The retained records were then aligned and inspected manually in Geneious Prime (Kearse et al., 2012). Sequences were excluded from mismatch scoring when they lacked the complete `batra` amplicon or either primer-binding region. Records with primer-binding mismatches inconsistent with other sequences of the same species were also excluded as probable sequencing or annotation errors.
 
 The retained accessions are listed in [`data/accessions_final_285.txt`](data/accessions_final_285.txt). The following files document the screening outcomes:
 
@@ -79,13 +79,13 @@ The retained accessions are listed in [`data/accessions_final_285.txt`](data/acc
 - [`results/insilico_filtering_results/species_no_unambiguous_sequence.txt`](results/insilico_filtering_results/species_no_unambiguous_sequence.txt): taxa for which no record could be attributed unambiguously;
 - [`results/insilico_filtering_results/accessions_discarded_seq.txt`](results/insilico_filtering_results/accessions_discarded_seq.txt): accessions removed during manual inspection.
 
-[`Scripts/04_assign_tax.sh`](Scripts/04_assign_tax.sh) assigns taxonomy to the curated records with CRABS and the NCBI taxonomy files. The taxonomic table is [`results/batra_taxonomy.tsv`](results/batra_taxonomy.tsv).
+[`Scripts/04_assign_tax.sh`](Scripts/04_assign_tax.sh) assigns taxonomy to the curated records with CRABS (Jeunen et al., 2023) and the NCBI taxonomy files. The taxonomic table is [`results/batra_taxonomy.tsv`](results/batra_taxonomy.tsv).
 
-[`Scripts/05_per_species_derep.sh`](Scripts/05_per_species_derep.sh) dereplicates sequences within species with VSEARCH. [`Scripts/06_variants_report.sh`](Scripts/06_variants_report.sh) produces the per-species summary in [`results/variants_report.tsv`](results/variants_report.tsv). The 285 retained records represent 85 unique sequence variants across 32 taxa.
+[`Scripts/05_per_species_derep.sh`](Scripts/05_per_species_derep.sh) dereplicates sequences within species with VSEARCH (Rognes et al., 2016). [`Scripts/06_variants_report.sh`](Scripts/06_variants_report.sh) produces the per-species summary in [`results/variants_report.tsv`](results/variants_report.tsv). The 285 retained records represent 85 unique sequence variants across 32 taxa.
 
 ### Score primer--template mismatches
 
-[`Scripts/07_primerminer_eval.R`](Scripts/07_primerminer_eval.R) evaluates the forward and reverse primer-binding regions with PrimerMiner. For the alignment used in this study, forward-primer positions were 1--17 and reverse-primer positions were 76--98. These coordinates are specific to this alignment and must be recalculated for a different marker or alignment.
+[`Scripts/07_primerminer_eval.R`](Scripts/07_primerminer_eval.R) evaluates the forward and reverse primer-binding regions with PrimerMiner (Elbrecht and Leese, 2017). For the alignment used in this study, forward-primer positions were 1--17 and reverse-primer positions were 76--98. These coordinates are specific to this alignment and must be recalculated for a different marker or alignment.
 
 The released results are:
 
@@ -99,7 +99,7 @@ The released results are:
 
 The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls. [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) provides library role, site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
 
-Raw reads were processed with Barque v1.8.5. [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, chimera removal, dereplication, denoising and taxonomic assignment. ASVs detected in negative controls were removed with microDecon.
+Raw reads were processed with Barque v1.8.5. (https://github.com/enormandeau/barque) [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, chimera removal, dereplication, denoising and taxonomic assignment. ASVs detected in negative controls were removed with microDecon (https://github.com/donaldtmcknight/microDecon).
 
 ### Metabarcoding assignment database
 
@@ -122,7 +122,8 @@ The final post-decontamination ASV table is available as both [`empirical/result
 
 ## Software
 
-The in silico workflow uses Entrez Direct (Kans, 2013), CRABS (Jeunen et al., 2023), MAFFT (Katoh and Standley, 2013), Geneious Prime (Kearse et al., 2012), VSEARCH (Rognes et al., 2016), R (R Core Team, 2021) and PrimerMiner (Elbrecht and Leese, 2017). The empirical workflow uses Barque v1.8.5 Barque (https://github.com/enormandeau/barque), Trimmomatic v0.36 (Bolger et al., 2014), FLASH v1.2.11 (Magoč and Salzberg, 2011), VSEARCH v2.27 (Rognes et al., 2016) and microDecon (https://github.com/donaldtmcknight/microDecon).
+The in silico workflow uses Entrez Direct (Kans, 2013), CRABS (Jeunen et al., 2023), MAFFT (Katoh and Standley, 2013), Geneious Prime (Kearse et al., 2012), VSEARCH (Rognes et al., 2016), R (R Core Team, 2021) and PrimerMiner (Elbrecht and Leese, 2017). 
+The empirical workflow uses Barque v1.8.5 (https://github.com/enormandeau/barque), Trimmomatic v0.36 (Bolger et al., 2014), FLASH v1.2.11 (Magoč and Salzberg, 2011), VSEARCH v2.27 (Rognes et al., 2016) and microDecon (https://github.com/donaldtmcknight/microDecon).
 
 ## Raw-read access
 
