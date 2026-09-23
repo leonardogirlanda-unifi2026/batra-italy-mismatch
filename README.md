@@ -127,3 +127,27 @@ The in silico workflow uses Entrez Direct (Kans, 2013), CRABS (Jeunen et al., 20
 ## Raw-read access
 
 The raw FASTQ files are available from the corresponding author upon reasonable request. The repository provides their filenames, library roles, read counts and SHA-256 checksums so that requested files can be checked against the dataset used in the study.
+
+## References
+If you use this workflow please cite: 
+Bolger, A.M., Lohse, M. and Usadel, B. (2014): Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics 30: 2114–2120. https://doi.org/10.1093/bioinformatics/btu170
+
+Elbrecht, V. and Leese, F. (2017): PrimerMiner: an R package for development and in silico validation of DNA metabarcoding primers. Methods in Ecology and Evolution 8: 622–626. https://doi.org/10.1111/2041-210X.12687
+
+Jeunen, G.J., Dowle, E., Edgecombe, J., von Ammon, U., Gemmell, N.J. and Cross, H. (2023): CRABS: a software program to generate curated reference databases for metabarcoding sequencing data. Molecular Ecology Resources 23: 725–738. https://doi.org/10.1111/1755-0998.13741
+
+Kans, J. (2013): Entrez Direct: E-utilities on the Unix Command Line. In: Entrez® Programming Utilities Help. National Center for Biotechnology Information. https://www.ncbi.nlm.nih.gov/books/NBK179288/
+
+Kearse, M. et al. (2012): Geneious Basic: an integrated and extendable desktop software platform for the organization and analysis of sequence data. Bioinformatics 28: 1647–1649. https://doi.org/10.1093/bioinformatics/bts199
+
+Magoč, T. and Salzberg, S.L. (2011): FLASH: fast length adjustment of short reads to improve genome assemblies. Bioinformatics 27: 2957–2963. https://doi.org/10.1093/bioinformatics/btr507
+
+Mathon, L., Valentini, A., Guérin, P.-E., Normandeau, E., Noel, C., Lionnet, C., Boulanger, E., Thuiller, W., Bernatchez, L., Mouillot, D., Dejean, T. and Manel, S. (2021): Benchmarking bioinformatic tools for fast and accurate eDNA metabarcoding species identification. Molecular Ecology Resources 21: 2565–2579. https://doi.org/10.1111/1755-0998.13430
+
+McKnight, D.T., Huerlimann, R., Bower, D.S., Schwarzkopf, L., Alford, R.A. and Zenger, K.R. (2019): microDecon: a highly accurate read-subtraction tool for the post-sequencing removal of contamination in metabarcoding studies. Environmental DNA 1: 14–25. https://doi.org/10.1002/edn3.11
+
+R Core Team (2021): R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. https://www.R-project.org/
+
+Rognes, T., Flouri, T., Nichols, B., Quince, C. and Mahé, F. (2016): VSEARCH: a versatile open source tool for metagenomics. PeerJ 4: e2584. https://doi.org/10.7717/peerj.2584
+
+Valentini, A., Taberlet, P., Miaud, C., Civade, R., Herder, J., Thomsen, P.F., Bellemain, E., Besnard, A., Coissac, E., Boyer, F., Gaboriaud, C., Jean, P., Poulet, N., Roset, N., Copp, G.H., Geniez, P., Pont, D., Argillier, C., Baudoin, J.-M., Peroux, T., Crivelli, A.J., Olivier, A., Acqueberge, M., Le Brun, M., Møller, P.R., Willerslev, E., Dejean, T. (2016): Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. Mol. Ecol. 25: 929–942.
