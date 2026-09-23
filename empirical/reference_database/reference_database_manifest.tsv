@@ -88,7 +88,7 @@ DB086	PQ816544-Batra_Ambystoma_tigrinum	1	Ambystoma tigrinum	NCBI GenBank	PQ8165
 DB087	PQ858033_Rana_dalmatina	1	Rana dalmatina	NCBI GenBank	PQ858033	52	Retrieve from NCBI Nucleotide using the listed accession		
 DB088	PV034403-Batra_Lithobathes_catesbeianus	1	Lithobathes catesbeianus	NCBI GenBank	PV034403	53	Retrieve from NCBI Nucleotide using the listed accession		
 DB089	PV054095-Batra_Ambystoma_tigrinum	1	Ambystoma tigrinum	NCBI GenBank	PV054095	53	Retrieve from NCBI Nucleotide using the listed accession		
-DB090	Rit2-Batr01_Rana-italica	1	Rana italica	in-house		52	Internal record; no public accession	PQ758684	Batra sequence identical to public record PQ758684.
+DB090	Rit2-Batr01_Rana-italica	1	Rana italica	in-house		52	Internal record; no public accession		Public equivalence and deposition status are under verification.
 DB091	RS3-Batr01_Bufotes-viridis	1	Bufotes viridis	in-house		51	Internal record; no public accession	FJ882813	Batra sequence identical to public record FJ882813.
 DB092	RS7-Batr01_Bufotes-viridis	1	Bufotes viridis	in-house		51	Internal record; no public accession	FJ882813	Batra sequence identical to public record FJ882813.
 DB093	U52726-Batra_Epidalea;Epidalea_calamita	1	Epidalea calamita	NCBI GenBank	U52726	51	Retrieve from NCBI Nucleotide using the listed accession		
