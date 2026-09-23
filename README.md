@@ -49,7 +49,7 @@ The 32 taxa assessed in silico comprise 28 native taxa and four allochthonous ta
 
 ### Primer definition
 
-[`data/Batra_primers.fasta`](data/Batra_primers.fasta) contains the `batra` primers used throughout the workflow:
+[`data/Batra_primers.fasta`](data/Batra_primers.fasta) contains the `batra` primers (Valentini, 2016) used throughout the workflow:
 
 ```text
 Forward: ACACCGCCCGTCACCCT
