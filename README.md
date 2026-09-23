@@ -1,337 +1,129 @@
-# Batra 12S primers for Italian amphibian eDNA
+# batra 12S primer assessment for amphibian eDNA in Italy
 
-This repository accompanies the manuscript **“In silico and empirical assessment of the Batra 12S primers for eDNA-based monitoring of amphibians in the Italian peninsula.”** It serves three related purposes:
+This repository contains the data, settings and scripts supporting the in silico and empirical assessment of the `batra` 12S primer pair for eDNA-based monitoring of amphibians in Italy. It provides the study outputs and a transparent workflow that can be adapted to another primer pair or regional taxon list.
 
-1. it provides the supplementary data used to document the in silico assessment and the field application;
-2. it records the main analytical decisions, intermediate counts, exclusions and revision checks;
-3. it provides a worked example that can be adapted to evaluate a different metabarcoding primer pair or target-taxon list.
+The workflow has two components:
 
-The repository is divided into an **in silico primer-assessment workflow** and an **empirical eDNA application**. The shell, Python and R commands preserve the main operations used in the study. Manual curation steps are identified explicitly, so the repository should be read as a transparent, reproducible workflow description rather than as a single unattended pipeline.
+1. an in silico assessment of primer--template mismatches in mitochondrial records available through NCBI Nucleotide;
+2. an empirical application to riverine eDNA samples from two Natura 2000 sites in north-western Italy.
 
-## At a glance
+The released scripts preserve the principal computational steps. Sequence inspection, alignment and curation were completed manually in Geneious Prime; they are described below because they remain necessary steps when reproducing or adapting the workflow.
 
-| Component | Released result |
+## Study outputs
+
+| Measure | Value |
 | --- | ---: |
-| Target taxa documented in Italy | 50 |
-| Taxa evaluated in the final mismatch analysis | 29 |
-| Taxa with incomplete primer-binding sites | 2 |
-| Taxa with no Batra amplicon in the original in silico PCR | 14 |
-| Taxa with no suitable sequence retrieved | 5 |
-| Initial NCBI accession occurrences | 919 (902 unique) |
-| Sequences reported after CRABS screening | 415, representing 36 taxa |
-| Curated accessions retained for mismatch analysis | 271 |
-| Unique sequence variants | 80 |
-| Empirical paired-end libraries | 62 (124 FASTQ files) |
+| Target taxa | 50 |
+| NCBI accession occurrences retrieved | 781 (762 unique accessions) |
+| Curated mitochondrial 12S records retained | 285 |
+| Taxa assessed for primer mismatches | 32 |
+| Unique sequence variants | 85 |
+| Maximum PrimerMiner penalty score | 59.75 |
+| Paired-end empirical libraries | 62 |
 | Raw read pairs | 2,083,452 |
-| Taxa in the released site-level ASV table | 21 (5 amphibian and 16 non-target vertebrate taxa) |
-| Reads represented in the released ASV table | 236,743 |
 
-The final analytical scope comprises taxa documented as naturally occurring or naturalized in Italy. The revision added *Hyla perrini* and *Ichthyosaura apuana* and excluded five non-Italian taxa that had originally been included as technical comparators: *Ambystoma tigrinum*, *Bombina orientalis*, *Dyscophus antongilii*, *Epidalea calamita* and *Triturus cristatus*. Naturalized non-native taxa documented in Italy were retained because they are relevant to biodiversity monitoring. The original broader lists and outputs remain available as explicitly labelled provenance files.
+The 32 taxa assessed in silico comprise 28 native taxa and four allochthonous taxa naturalized in Italy. Five are endemic to Italy. All evaluated taxa had maximum penalty scores below the PrimerMiner threshold associated with likely primer failure.
 
-## Repository contents
+## Repository layout
 
 ```text
 .
-├── README.md
-├── LICENSE
-├── Scripts/
-│   ├── 01_ncbi_download.sh
-│   ├── 02_crabs_insilico_pcr.sh
-│   ├── 03_fetch_full_sequences.sh
-│   ├── 04_assign_tax.sh
-│   ├── 05_per_species_derep.sh
-│   ├── 06_variants_report.sh
-│   └── 07_primerminer_eval.R
-├── data/
-│   ├── Batra_primers.fasta
-│   ├── species_list_53.txt
-│   ├── species_list_50.txt
-│   ├── species_list_original_55_with_comparators.txt
-│   ├── taxon_name_overrides.tsv
-│   ├── accessions_initial_919.txt
-│   ├── accessions_final_271.txt
-│   ├── accessions_final_original_408.txt
-│   ├── evaluated_species_29.txt
-│   └── evaluated_species_original_34.txt
-├── results/
-│   ├── species_screening_summary.tsv
-│   ├── excluded_non_italian_comparators.tsv
-│   ├── targeted_sequence_audit.tsv
-│   ├── accession_flow.tsv
-│   ├── review_audit_report.txt
-│   ├── variants_report.tsv
-│   ├── batra_taxonomy.tsv
-│   ├── insilico_filtering_results/
-│   └── mismatch_analysis_results/
+├── Scripts/                         # in silico workflow commands
+├── data/                            # primers, target list, accession lists and taxonomic overrides
+├── results/                         # screening, taxonomy, variants and PrimerMiner outputs
 └── empirical/
-    ├── analysis/
-    │   ├── barque_config_BATRA.sh
-    │   └── primers.csv
-    ├── reference_database/
-    │   └── reference_database_manifest.tsv
-    ├── results/
-    │   ├── INNATURA_ASV_table_corrected.xlsx
-    │   └── INNATURA_ASV_table_corrected.tsv
-    ├── raw_reads_manifest.tsv
-    └── raw_reads_summary.tsv
+    ├── analysis/                    # Barque configuration and primer definition
+    ├── reference_database/          # record-level manifest of the assignment database
+    ├── results/                     # final site-level ASV table
+    ├── raw_reads_manifest.tsv       # per-file read metadata and checksums
+    └── raw_reads_summary.tsv         # read totals by library role
 ```
 
-The raw FASTQ files are available from the corresponding author upon reasonable request. Their filenames, library roles, read counts and checksums are documented in the repository. See [Raw reads and metadata](#raw-reads-and-metadata).
+## In silico primer assessment
 
-## Part I: in silico primer assessment
+### Target taxa and nomenclature
 
-### 1. Define the biological scope
+[`data/species_list_50.txt`](data/species_list_50.txt) contains the 50 amphibian taxa documented as naturally occurring or naturalized in Italy. The list was compiled from the national checklist of the Italian fauna, the Italian IUCN Red List of Vertebrates and the Union list of invasive alien species.
 
-The original analysis started from [`data/species_list_53.txt`](data/species_list_53.txt). During revision, *H. perrini* and *I. apuana* were added and five non-Italian technical comparators were removed. The current one-name-per-line target list is [`data/species_list_50.txt`](data/species_list_50.txt). The intermediate 55-taxon list is retained as [`data/species_list_original_55_with_comparators.txt`](data/species_list_original_55_with_comparators.txt), and the scope exclusions are documented in [`results/excluded_non_italian_comparators.tsv`](results/excluded_non_italian_comparators.tsv).
+[`data/taxon_name_overrides.tsv`](data/taxon_name_overrides.tsv) records the historical combinations included in sequence retrieval. It keeps the query name and accepted name separate where a nomenclatural change could otherwise hide relevant NCBI records.
 
-The scope criterion is occurrence in Italy, not native status alone. Consequently, naturalized non-native taxa documented in Italy remain in the assessment. Query names, accepted names and historical combinations are kept separate in [`data/taxon_name_overrides.tsv`](data/taxon_name_overrides.tsv), preventing a nomenclatural change from breaking the link to the original retrieval.
+### Primer definition
 
-When adapting the workflow, create a one-name-per-line target list and decide in advance whether it represents:
-
-- a verified regional checklist;
-- a broader surveillance list that also includes non-native taxa;
-- technical comparators used only to test primer behaviour.
-
-These categories should be stored explicitly rather than inferred later from the results.
-
-### 2. Retrieve assembled mitochondrial records from NCBI
-
-[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) queries NCBI Nucleotide (`nuccore`) separately for each taxon and retrieves assembled mitochondrial records annotated with 12S-related terms. The original length filter was 50–30,000 bp.
-
-Important scope limitation: this query interrogates assembled Nucleotide records. It does **not** search raw reads in the Sequence Read Archive.
-
-For the original Batra run:
-
-- 919 accession occurrences were downloaded;
-- 902 accession numbers were unique;
-- 50 target taxa were represented.
-
-The original accessions are retained in [`data/accessions_initial_919.txt`](data/accessions_initial_919.txt).
-
-### 3. Screen sequences by in silico PCR
-
-[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the downloaded records using CRABS and the Batra primers:
+[`data/Batra_primers.fasta`](data/Batra_primers.fasta) contains the `batra` primers used throughout the workflow:
 
 ```text
 Forward: ACACCGCCCGTCACCCT
 Reverse: GTAYACTTACCATGTTACGACTT
 ```
 
-The original broader screening reported 415 sequences representing 36 taxa after this step. This count is retained as workflow provenance because the complete intermediate accession list is not available. The final Italy-scope mismatch dataset was produced by removing the five documented comparator taxa from the curated results. Entries that are absent from both the original final and manually discarded lists are labelled conservatively in [`results/accession_flow.tsv`](results/accession_flow.tsv).
+### Retrieve mitochondrial records
 
-Taxa for which the original screening returned no predicted Batra amplicon are listed in [`results/insilico_filtering_results/species_no_batra_amplicon.txt`](results/insilico_filtering_results/species_no_batra_amplicon.txt).
+[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) queries NCBI Nucleotide separately for each taxon. The query retrieves mitochondrial records between 50 and 30,000 bp that either contain a 12S-related annotation or are 5,000--30,000 bp long. This second condition retains mitochondrial genomes that may not be indexed with a 12S annotation.
 
-### 4. Retrieve complete records and inspect primer-binding regions
+The query operates on assembled NCBI Nucleotide records. It does not search raw reads deposited only in the Sequence Read Archive.
 
-[`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the complete NCBI records corresponding to predicted amplicons. The sequences were then inspected manually in Geneious Prime 2026.0.2:
+The retrieved accession occurrences are listed in [`data/accessions_initial_781.txt`](data/accessions_initial_781.txt).
 
-- primer binding was checked with a maximum of four mismatches;
-- sequences were aligned with MAFFT;
-- records were trimmed to retain the amplicon and both primer-binding regions;
-- incomplete primer-binding sites were excluded from mismatch scoring;
-- records with mismatch patterns inconsistent with conspecific sequences were removed as probable sequencing or annotation errors.
+### Screen, curate and dereplicate sequences
 
-Two affected taxa are recorded in [`species_incomplete_primer_sites.txt`](results/insilico_filtering_results/species_incomplete_primer_sites.txt), and the two manually discarded accessions are recorded in [`accessions_discarded_seq.txt`](results/insilico_filtering_results/accessions_discarded_seq.txt).
+[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS using the `batra` primer pair and an error value of 4.5. [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
 
-The final Italy-scope accession list contains 271 records representing 29 taxa: [`data/accessions_final_271.txt`](data/accessions_final_271.txt). The previously released broader list of 408 records is retained as [`data/accessions_final_original_408.txt`](data/accessions_final_original_408.txt).
+The retained records were then aligned and inspected manually in Geneious Prime. Sequences were excluded from mismatch scoring when they lacked the complete `batra` amplicon or either primer-binding region. Records with primer-binding mismatches inconsistent with other sequences of the same species were also excluded as probable sequencing or annotation errors.
 
-### 5. Retrieve taxonomy and dereplicate within species
+The retained accessions are listed in [`data/accessions_final_285.txt`](data/accessions_final_285.txt). The following files document the screening outcomes:
 
-[`Scripts/04_assign_tax.sh`](Scripts/04_assign_tax.sh) uses CRABS and the NCBI taxonomy files to associate accessions with taxonomic names.
+- [`results/species_screening_summary.tsv`](results/species_screening_summary.tsv): one mutually exclusive outcome for each target taxon;
+- [`results/insilico_filtering_results/species_no_batra_amplicon.txt`](results/insilico_filtering_results/species_no_batra_amplicon.txt): taxa without a predicted `batra` amplicon;
+- [`results/insilico_filtering_results/species_incomplete_primer_sites.txt`](results/insilico_filtering_results/species_incomplete_primer_sites.txt): taxa represented only by incomplete primer-binding sites;
+- [`results/insilico_filtering_results/species_missing_no_sequences.txt`](results/insilico_filtering_results/species_missing_no_sequences.txt): taxa without a retrieved assembled record;
+- [`results/insilico_filtering_results/species_no_unambiguous_sequence.txt`](results/insilico_filtering_results/species_no_unambiguous_sequence.txt): taxa for which no record could be attributed unambiguously;
+- [`results/insilico_filtering_results/accessions_discarded_seq.txt`](results/insilico_filtering_results/accessions_discarded_seq.txt): accessions removed during manual inspection.
 
-[`Scripts/05_per_species_derep.sh`](Scripts/05_per_species_derep.sh) then:
+[`Scripts/04_assign_tax.sh`](Scripts/04_assign_tax.sh) assigns taxonomy to the curated records with CRABS and the NCBI taxonomy files. The taxonomic table is [`results/batra_taxonomy.tsv`](results/batra_taxonomy.tsv).
 
-1. links accessions to species;
-2. renames FASTA headers;
-3. separates records by species;
-4. dereplicates full-length sequences with VSEARCH.
+[`Scripts/05_per_species_derep.sh`](Scripts/05_per_species_derep.sh) dereplicates sequences within species with VSEARCH. [`Scripts/06_variants_report.sh`](Scripts/06_variants_report.sh) produces the per-species summary in [`results/variants_report.tsv`](results/variants_report.tsv). The 285 retained records represent 85 unique sequence variants across 32 taxa.
 
-The embedded Python step requires Biopython. Dereplication is performed within species, so an identical sequence occurring in two different taxa is not silently merged across taxonomic labels.
+### Score primer--template mismatches
 
-[`Scripts/06_variants_report.sh`](Scripts/06_variants_report.sh) summarizes the number of input records, unique variants and abundance of the most frequent variant for each species. The released result is [`results/variants_report.tsv`](results/variants_report.tsv).
+[`Scripts/07_primerminer_eval.R`](Scripts/07_primerminer_eval.R) evaluates the forward and reverse primer-binding regions with PrimerMiner. For the alignment used in this study, forward-primer positions were 1--17 and reverse-primer positions were 76--98. These coordinates are specific to this alignment and must be recalculated for a different marker or alignment.
 
-### 6. Score primer-template mismatches
+The released results are:
 
-[`Scripts/07_primerminer_eval.R`](Scripts/07_primerminer_eval.R) evaluates the forward and reverse primer-binding regions with PrimerMiner. The aligned Batra dataset used forward-primer columns 1–17 and reverse-primer columns 76–98. These coordinates are specific to this alignment and must be recalculated for a different marker or alignment.
+- [`results/mismatch_analysis_results/Batra_F_eval.tsv`](results/mismatch_analysis_results/Batra_F_eval.tsv);
+- [`results/mismatch_analysis_results/Batra_R_eval.tsv`](results/mismatch_analysis_results/Batra_R_eval.tsv);
+- [`results/mismatch_analysis_results/Table1_mismatch_summary.tsv`](results/mismatch_analysis_results/Table1_mismatch_summary.tsv), the data underlying Table 1.
 
-The released outputs are:
+## Empirical eDNA application
 
-- [`Batra_F_eval.tsv`](results/mismatch_analysis_results/Batra_F_eval.tsv);
-- [`Batra_R_eval.tsv`](results/mismatch_analysis_results/Batra_R_eval.tsv);
-- [`Table1_mismatch_summary.tsv`](results/mismatch_analysis_results/Table1_mismatch_summary.tsv).
+### Sequencing data and workflow settings
 
-The maximum observed penalty score was 59.75. No taxon exceeded the score of 120 associated with likely primer failure in the PrimerMiner framework.
+The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls. [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) provides library role, site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
 
-### 7. Document the fate of every target taxon
+Raw reads were processed with Barque v1.8.5. [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, chimera removal, dereplication, denoising and taxonomic assignment. ASVs detected in negative controls were removed with microDecon.
 
-[`results/species_screening_summary.tsv`](results/species_screening_summary.tsv) assigns each of the 50 Italy-scope target taxa to one mutually exclusive outcome:
+### Metabarcoding assignment database
 
-- evaluated in the mismatch analysis;
-- incomplete primer-binding sites;
-- no Batra amplicon in the original in silico PCR;
-- no suitable sequence retrieved.
+[`empirical/reference_database/reference_database_manifest.tsv`](empirical/reference_database/reference_database_manifest.tsv) describes the amphibian reference records used for taxonomic assignment. It reports taxon labels, record identifiers, source, public GenBank accession where available, sequence length and public-equivalent information for in-house records.
 
-[`results/excluded_non_italian_comparators.tsv`](results/excluded_non_italian_comparators.tsv) lists the five taxa removed during revision and reports their original sequence and variant counts. The current PrimerMiner tables and Table 1 summary contain only the 29 evaluated taxa retained within the Italian scope; the corresponding broader-scope outputs are preserved with `_original_34_taxa` in their filenames.
+The working reference database contained 94 record occurrences: 91 public GenBank records representing 90 unique accessions, and three in-house records. The manifest documents the reference database at record level; it does not distribute the working FASTA file. This assignment database is broader than the Italy-focused in silico assessment because it reflects the records used during empirical sequence assignment.
 
-[`results/targeted_sequence_audit.tsv`](results/targeted_sequence_audit.tsv) records the targeted revision checks for *H. perrini* and *I. apuana* and retains the original workflow outcomes for *H. sarda* and *Salamandrina perspicillata*.
+### Final taxon-by-site table
 
-## Part II: empirical eDNA application
+The final post-decontamination ASV table is available as both [`empirical/results/INNATURA_ASV_table_corrected.tsv`](empirical/results/INNATURA_ASV_table_corrected.tsv) and [`empirical/results/INNATURA_ASV_table_corrected.xlsx`](empirical/results/INNATURA_ASV_table_corrected.xlsx). It reports the taxonomic assignments aggregated by Natura 2000 site.
 
-### Sampling and laboratory overview
+## Adapting the workflow to another marker
 
-The field dataset comprised eight stream sampling locations within two Natura 2000 areas in north-western Italy. At each location, six 1 L water samples were collected along a 50 m transect. Field blanks were processed in parallel. DNA extractions were amplified in technical triplicate with the Batra primers, and pooled products were indexed and sequenced on an Illumina MiSeq using 2 × 150 bp reads.
-
-The raw-data manifest documents:
-
-- 48 field-sample libraries;
-- 8 field blanks;
-- 3 PCR negative-control libraries;
-- 3 positive-control libraries;
-- 62 paired-end libraries in total;
-- 2,083,452 read pairs.
-
-The files identify the positive controls as `Pos1`, `Pos2A` and `Pos2B`. Their biological composition is not encoded in the filenames and should not be inferred from the repository.
-
-### Bioinformatic processing
-
-Raw reads were processed with Barque v1.8.5. The exact supplied settings are in [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh), and the active primer/database definition is in [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv).
-
-Key settings include:
-
-| Setting | Value |
-| --- | ---: |
-| Read crop length | 90 bp |
-| Minimum merge overlap | 30 bp |
-| Maximum merge overlap | 280 bp |
-| Maximum primer differences | 2 |
-| Minimum query coverage | 0.90 |
-| Minimum hit length | 40 bp |
-| Minimum hits in one sample | 3 |
-| Minimum hits in the experiment | 5 |
-| Species identity threshold | 0.99 |
-| Genus identity threshold | 0.95 |
-| Higher-level threshold in the primer file | 0.90 |
-
-The Barque workflow includes Trimmomatic filtering, FLASH read merging, chimera removal, VSEARCH-based dereplication and assignment, and ASV generation. ASVs detected in negative controls were removed with microDecon using default parameters. No custom microDecon script was used.
-
-### Empirical reference database
-
-The sequence records and species included in the empirical amphibian reference are listed in [`empirical/reference_database/reference_database_manifest.tsv`](empirical/reference_database/reference_database_manifest.tsv). The manifest reports the original database record identifier, taxon label, record source and sequence length. For public records, it also reports the GenBank accession, which can be used to retrieve the corresponding record from NCBI Nucleotide.
-
-The working reference contained 94 record occurrences: 91 public GenBank records (90 unique accessions) and three in-house records. For traceability, the manifest records that:
-
-- `RS3-Batr01_Bufotes-viridis` and `RS7-Batr01_Bufotes-viridis` are identical to FJ882813;
-- `Rit2-Batr01_Rana-italica` is identical to PQ758684.
-
-The two occurrences of PP471678 are retained as separate manifest rows so that the table reflects the composition of the working reference exactly. The manifest contains record-level metadata rather than nucleotide strings.
-
-The manifest describes the amphibian reference component only. Non-target vertebrate ASVs were investigated during downstream curation with BLAST; the corresponding non-target reference records are not part of this list. It should therefore not be interpreted as a universal vertebrate reference database.
-
-The empirical assignment database is intentionally broader than the in silico mismatch assessment. Records belonging to taxa excluded from the Italy-focused mismatch analysis remain listed in the manifest because the database used for sequence assignment was not retrospectively altered.
-
-### ASV table
-
-The final taxon-by-site table is provided in both Excel and machine-readable TSV formats:
-
-- [`INNATURA_ASV_table_corrected.xlsx`](empirical/results/INNATURA_ASV_table_corrected.xlsx);
-- [`INNATURA_ASV_table_corrected.tsv`](empirical/results/INNATURA_ASV_table_corrected.tsv).
-
-The public copy corrects three taxonomic labels without changing any read count:
-
-- *Erithacus rubecula*: family Muscicapidae;
-- *Parus major*: family Paridae;
-- *Oncorhynchus* sp.: group Fish.
-
-The table reports 236,743 reads assigned to 21 reportable vertebrate taxa across the eight site codes. The manuscript reports 236,763 reads after filtering, denoising and decontamination. The 20-read difference is consistent with the table note that human sequences and potential contaminants were omitted, but the unavailable per-ASV intermediate table prevents independent attribution of those 20 reads. Both totals are retained here to keep the reporting transparent.
-
-## Raw reads and metadata
-
-The raw FASTQ files are not included in this repository and are available from the corresponding author upon reasonable request.
-
-[`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) records the library role, site code, read direction, filename, read count and SHA-256 checksum for every FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides totals by library role. These metadata allow the requested files to be checked against the dataset used in the study.
-
-## Adapting the workflow to another primer pair
-
-The sequence below is the minimum recommended adaptation path.
-
-### Parameters that must be changed
-
-| Component | Batra example | Change for a new primer |
-| --- | --- | --- |
-| Target taxa | `data/species_list_50.txt` | Supply the relevant regional checklist and document any broader comparator set separately |
-| Locus search | Mitochondrial 12S terms | Replace with the target locus and known annotation synonyms |
-| Record-length filter | 50–30,000 bp | Set bounds that retain complete marker and primer sites |
-| Primer sequences | Batra forward/reverse | Replace in CRABS, the primer FASTA, PrimerMiner and Barque |
-| In silico amplicon constraints | CRABS defaults used here | Set and report mismatch and length parameters explicitly |
-| Alignment coordinates | Forward 1–17; reverse 76–98 | Recalculate from the new aligned primer-binding regions |
-| Empirical crop length | 90 bp | Set below the expected merged amplicon length |
-| Merge overlap | 30–280 bp | Adapt to read length and amplicon size |
-| Assignment thresholds | 0.99/0.95/0.90 | Validate against the discriminatory power of the new marker |
-| Reference database | Curated Batra-length references | Build a locus-specific database including expected non-targets |
-
-### Recommended sequence of work
-
-1. Freeze and version the target-taxon list before downloading sequences.
-2. Store the query name separately from the accepted taxonomic name.
-3. Record the exact database, date, query, annotation terms and length limits.
-4. Preserve accession lists after retrieval, in silico PCR and manual curation.
-5. Inspect both primer-binding regions; a locus annotation alone does not guarantee that the amplicon is present.
-6. Dereplicate within taxon, not across taxa.
-7. Recalculate alignment coordinates before running PrimerMiner.
-8. Validate taxonomic assignment thresholds against closely related species.
-9. Include field blanks, PCR negatives and a documented positive control in empirical tests.
-10. Publish the configuration, primer file, reference-database metadata, final ASV table and raw-read manifest.
-11. Interpret non-detections cautiously: they do not by themselves demonstrate species absence or primer failure.
-
-### What the scripts do and do not automate
-
-The numbered scripts preserve the main command sequence, but some transitions depend on manually curated Geneious files. File names such as `batra_primer_regions410aligned.fasta` and `batra_uniqueseq_itamph_alignment.fasta` refer to these manual outputs. For another primer, rename the files consistently or modify the script arguments.
-
-Before running the first script from a separate analysis directory, provide its expected one-name-per-line input:
-
-```bash
-cp /path/to/this/repository/data/species_list_50.txt lista_anfibi.txt
-bash /path/to/this/repository/Scripts/01_ncbi_download.sh
-```
-
-Subsequent scripts expect the output names documented in their source. Review each script before execution and keep a copy of the exact commands and software versions used for the new marker.
-
-## Known limitations
-
-- NCBI retrieval covered assembled Nucleotide records, not raw SRA reads.
-- The list of 415 post-CRABS accessions was not available for release; this stage remains unresolved at accession level in `accession_flow.tsv`.
-- The counts of 919 retrieved records and 415 post-CRABS sequences describe the original broader workflow. The final mismatch tables and summary statistics use the Italy-scope subset of 271 sequences from 29 taxa.
-- Several steps depend on manual Geneious inspection and curated FASTA alignments that cannot be regenerated from accession lists alone.
-- No comparative 16S analysis or degenerate-primer redesign was performed.
-- The targeted revision searches did not recover a suitable Batra-region reference for *H. perrini* or an unambiguously attributable reference for *I. apuana*.
-- The empirical reference manifest describes the amphibian component only and should not be used as a complete vertebrate database.
-- Raw sequencing reads are available from the corresponding author upon reasonable request and are not deposited in this public repository.
-- The field dataset has limited spatial and temporal coverage. Non-detection in these samples should not be interpreted as evidence of species absence or primer failure.
+1. Create a taxon list appropriate to the study area and document any historical taxonomic names needed for sequence retrieval.
+2. Replace the primer sequences in `data/Batra_primers.fasta` and update the CRABS command in `Scripts/02_crabs_insilico_pcr.sh`.
+3. Adapt the NCBI query in `Scripts/01_ncbi_download.sh` to the target marker and expected record lengths.
+4. Run the retrieval and in silico PCR steps, then inspect alignments manually to confirm that each retained sequence spans the complete amplicon and both primer-binding sites.
+5. Assign taxonomy, dereplicate within taxa and update the PrimerMiner coordinates for the new alignment before scoring primer mismatches.
+6. Record the fate of every target taxon and release the accession lists, curation criteria and mismatch outputs alongside the manuscript.
 
 ## Software
 
-| Tool | Role |
-| --- | --- |
-| NCBI Entrez Direct | Nucleotide queries and FASTA retrieval |
-| CRABS | In silico PCR and taxonomic metadata assignment |
-| Geneious Prime 2026.0.2 | Manual inspection and curation for the mismatch assessment |
-| MAFFT | Sequence alignment |
-| VSEARCH | Dereplication and sequence assignment |
-| Python 3 with Biopython | FASTA header handling during per-species dereplication |
-| R with PrimerMiner and Biostrings | Primer mismatch scoring |
-| Barque v1.8.5 | Empirical read processing and ASV workflow |
-| microDecon | Negative-control-based decontamination |
+The in silico workflow uses Entrez Direct, CRABS, MAFFT, Geneious Prime, VSEARCH, R and PrimerMiner. The empirical workflow uses Barque v1.8.5, Trimmomatic v0.36, FLASH v1.2.11, VSEARCH v2.27 and microDecon.
 
-## Citation
+## Raw-read access
 
-When using the study data, cite the associated manuscript after publication. Until then, cite this repository together with the principal software and methodological references relevant to the reused components.
-
-- Elbrecht V, Leese F (2017). PrimerMiner: an R package for development and in silico validation of DNA metabarcoding primers. *Methods in Ecology and Evolution* 8:622–626. <https://doi.org/10.1111/2041-210X.12687>
-- Jeunen GJ et al. (2023). CRABS: a software program to generate curated reference databases for metabarcoding sequencing data. *Molecular Ecology Resources* 23:725–738. <https://doi.org/10.1111/1755-0998.13741>
-- McKnight DT et al. (2019). microDecon: a highly accurate read-subtraction tool for the post-sequencing removal of contamination in metabarcoding studies. *Environmental DNA* 1:14–25. <https://doi.org/10.1002/edn3.11>
-- Rognes T et al. (2016). VSEARCH: a versatile open source tool for metagenomics. *PeerJ* 4:e2584. <https://doi.org/10.7717/peerj.2584>
-- Valentini A et al. (2016). Next-generation monitoring of aquatic biodiversity using environmental DNA metabarcoding. *Molecular Ecology* 25:929–942. <https://doi.org/10.1111/mec.13428>
-
-## License and third-party data
-
-Repository code is released under the [MIT License](LICENSE). Public database accessions remain subject to the attribution and reuse conditions of their source databases. The license does not transfer ownership of third-party NCBI or BOLD records.
+The raw FASTQ files are available from the corresponding author upon reasonable request. The repository provides their filenames, library roles, read counts and SHA-256 checksums so that requested files can be checked against the dataset used in the study.
