@@ -122,7 +122,7 @@ The final post-decontamination ASV table is available as both [`empirical/result
 
 ## Software
 
-The in silico workflow uses Entrez Direct, CRABS, MAFFT, Geneious Prime, VSEARCH, R and PrimerMiner. The empirical workflow uses Barque v1.8.5, Trimmomatic v0.36, FLASH v1.2.11, VSEARCH v2.27 and microDecon.
+The in silico workflow uses Entrez Direct (Kans, 2013), CRABS (Jeunen et al., 2023), MAFFT (Katoh and Standley, 2013), Geneious Prime (Kearse et al., 2012), VSEARCH (Rognes et al., 2016), R (R Core Team, 2021) and PrimerMiner (Elbrecht and Leese, 2017). The empirical workflow uses Barque v1.8.5 Barque (https://github.com/enormandeau/barque), Trimmomatic v0.36 (Bolger et al., 2014), FLASH v1.2.11 (Magoč and Salzberg, 2011), VSEARCH v2.27 (Rognes et al., 2016) and microDecon (https://github.com/donaldtmcknight/microDecon).
 
 ## Raw-read access
 
