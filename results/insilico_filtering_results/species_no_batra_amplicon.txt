@@ -1,14 +1,12 @@
 Bufotes balearicus
 Bufotes boulengeri
 Lissotriton italicus
-Rana italica
 Rana latastei
 Salamandrina perspicillata
 Speleomantes ambrosii
 Speleomantes flavus
 Speleomantes genei
 Speleomantes imperialis
-Speleomantes italicus
+Speleomantes sarrabusensis
 Speleomantes strinatii
 Speleomantes supramontis
-Speleomantes sarrabusensis
