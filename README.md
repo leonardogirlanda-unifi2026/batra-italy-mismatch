@@ -66,7 +66,7 @@ The retrieved accession occurrences are listed in [`data/accessions_initial_781.
 
 ### Screen, curate and dereplicate sequences
 
-[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS using the `batra` primer pair and an error value of 4.5. [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
+[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS using the `batra` primer pair and an error value of 4.5 mismatches for each primers (default setting). [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
 
 The retained records were then aligned and inspected manually in Geneious Prime. Sequences were excluded from mismatch scoring when they lacked the complete `batra` amplicon or either primer-binding region. Records with primer-binding mismatches inconsistent with other sequences of the same species were also excluded as probable sequencing or annotation errors.
 
