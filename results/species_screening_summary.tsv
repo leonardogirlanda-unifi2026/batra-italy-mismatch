@@ -1,51 +1,51 @@
 query_name	accepted_name	screening_outcome	source_file	note
-Bombina pachypus	Bombina pachypus	evaluated	data/evaluated_species_29.txt	
-Bombina variegata	Bombina variegata	evaluated	data/evaluated_species_29.txt	
-Bufo bufo	Bufo bufo	evaluated	data/evaluated_species_29.txt	
-Bufo spinosus	Bufo spinosus	evaluated	data/evaluated_species_29.txt	
-Bufotes balearicus	Bufotes balearicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Bufotes viridis	Bufotes viridis	evaluated	data/evaluated_species_29.txt	
-Bufotes boulengeri	Bufotes boulengeri	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Bufotes siculus	Bufotes boulengeri siculus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	Original query name retained in the target list; accepted trinomial used in the revised manuscript.
-Discoglossus pictus	Discoglossus pictus	evaluated	data/evaluated_species_29.txt	
-Discoglossus sardus	Discoglossus sardus	evaluated	data/evaluated_species_29.txt	
-Euproctus platycephalus	Euproctus platycephalus	evaluated	data/evaluated_species_29.txt	
-Hyla arborea	Hyla arborea	evaluated	data/evaluated_species_29.txt	
-Hyla intermedia	Hyla intermedia	incomplete_primer_binding_sites	results/insilico_filtering_results/species_incomplete_primer_sites.txt	
-Hyla perrini	Hyla perrini	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	
-Hyla meridionalis	Hyla meridionalis	evaluated	data/evaluated_species_29.txt	
-Hyla sarda	Hyla sarda	incomplete_primer_binding_sites	results/insilico_filtering_results/species_incomplete_primer_sites.txt	
-Ichthyosaura alpestris	Ichthyosaura alpestris	evaluated	data/evaluated_species_29.txt	
-Ichthyosaura apuana	Ichthyosaura apuana	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	
-Lissotriton italicus	Lissotriton italicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Lissotriton vulgaris	Lissotriton vulgaris	evaluated	data/evaluated_species_29.txt	
-Lithobates catesbeianus	Aquarana catesbeiana	evaluated	data/evaluated_species_29.txt	Name used for the same taxon in the final evaluated-species and mismatch-result files.
-Pelobates fuscus	Pelobates fuscus	evaluated	data/evaluated_species_29.txt	
-Pelodytes punctatus	Pelodytes punctatus	evaluated	data/evaluated_species_29.txt	
-Pelophylax esculentus	Pelophylax esculentus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	
-Pelophylax lessonae	Pelophylax lessonae	evaluated	data/evaluated_species_29.txt	
-Pelophylax ridibundus	Pelophylax ridibundus	evaluated	data/evaluated_species_29.txt	
-Pelophylax bedriagae	Pelophylax bedriagae	evaluated	data/evaluated_species_29.txt	
-Pelophylax kurtmuelleri	Pelophylax kurtmuelleri	evaluated	data/evaluated_species_29.txt	
-Pelophylax bergeri	Pelophylax bergeri	evaluated	data/evaluated_species_29.txt	
-Pelophylax hispanicus	Pelophylax hispanicus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	
-Proteus anguinus	Proteus anguinus	evaluated	data/evaluated_species_29.txt	
-Rana dalmatina	Rana dalmatina	evaluated	data/evaluated_species_29.txt	
-Rana italica	Rana italica	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Rana latastei	Rana latastei	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Rana temporaria	Rana temporaria	evaluated	data/evaluated_species_29.txt	
-Salamandra atra	Salamandra atra	evaluated	data/evaluated_species_29.txt	
-Salamandra lanzai	Salamandra lanzai	evaluated	data/evaluated_species_29.txt	
-Salamandra salamandra	Salamandra salamandra	evaluated	data/evaluated_species_29.txt	
-Salamandrina perspicillata	Salamandrina perspicillata	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Salamandrina terdigitata	Salamandrina terdigitata	evaluated	data/evaluated_species_29.txt	
-Speleomantes ambrosii	Speleomantes ambrosii	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes flavus	Speleomantes flavus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes genei	Speleomantes genei	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes imperialis	Speleomantes imperialis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes italicus	Speleomantes italicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes strinatii	Speleomantes strinatii	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes supramontis	Speleomantes supramontis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Speleomantes sarrabusensis	Speleomantes sarrabusensis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	
-Triturus carnifex	Triturus carnifex	evaluated	data/evaluated_species_29.txt	
-Xenopus laevis	Xenopus laevis	evaluated	data/evaluated_species_29.txt	
+Bombina pachypus	Bombina pachypus	evaluated	data/evaluated_species_32.txt	not_applicable
+Bombina variegata	Bombina variegata	evaluated	data/evaluated_species_32.txt	not_applicable
+Bufo bufo	Bufo bufo	evaluated	data/evaluated_species_32.txt	not_applicable
+Bufo spinosus	Bufo spinosus	evaluated	data/evaluated_species_32.txt	not_applicable
+Bufotes balearicus	Bufotes balearicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Bufotes viridis	Bufotes viridis	evaluated	data/evaluated_species_32.txt	not_applicable
+Bufotes boulengeri	Bufotes boulengeri	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Bufotes siculus	Bufotes boulengeri siculus	no_unambiguously_attributable_sequence	results/insilico_filtering_results/species_no_unambiguous_sequence.txt	The expanded name query returned records assigned to Bufotes boulengeri, not an unambiguously attributable B. boulengeri siculus record.
+Discoglossus pictus	Discoglossus pictus	evaluated	data/evaluated_species_32.txt	not_applicable
+Discoglossus sardus	Discoglossus sardus	evaluated	data/evaluated_species_32.txt	not_applicable
+Euproctus platycephalus	Euproctus platycephalus	evaluated	data/evaluated_species_32.txt	not_applicable
+Hyla arborea	Hyla arborea	evaluated	data/evaluated_species_32.txt	not_applicable
+Hyla intermedia	Hyla intermedia	incomplete_primer_binding_sites	results/insilico_filtering_results/species_incomplete_primer_sites.txt	not_applicable
+Hyla perrini	Hyla perrini	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	not_applicable
+Hyla meridionalis	Hyla meridionalis	evaluated	data/evaluated_species_32.txt	not_applicable
+Hyla sarda	Hyla sarda	evaluated	data/evaluated_species_32.txt	not_applicable
+Ichthyosaura alpestris	Ichthyosaura alpestris	evaluated	data/evaluated_species_32.txt	not_applicable
+Ichthyosaura apuana	Ichthyosaura apuana	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	not_applicable
+Lissotriton italicus	Lissotriton italicus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Lissotriton vulgaris	Lissotriton vulgaris	evaluated	data/evaluated_species_32.txt	not_applicable
+Lithobates catesbeianus	Aquarana catesbeiana	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelobates fuscus	Pelobates fuscus	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelodytes punctatus	Pelodytes punctatus	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax esculentus	Pelophylax esculentus	no_unambiguously_attributable_sequence	results/insilico_filtering_results/species_no_unambiguous_sequence.txt	The expanded NCBI organism query returned records currently assigned to P. lessonae; none was treated as an unambiguous P. esculentus reference.
+Pelophylax lessonae	Pelophylax lessonae	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax ridibundus	Pelophylax ridibundus	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax bedriagae	Pelophylax bedriagae	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax kurtmuelleri	Pelophylax kurtmuelleri	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax bergeri	Pelophylax bergeri	evaluated	data/evaluated_species_32.txt	not_applicable
+Pelophylax hispanicus	Pelophylax hispanicus	no_sequences_retrieved	results/insilico_filtering_results/species_missing_no_sequences.txt	not_applicable
+Proteus anguinus	Proteus anguinus	evaluated	data/evaluated_species_32.txt	not_applicable
+Rana dalmatina	Rana dalmatina	evaluated	data/evaluated_species_32.txt	not_applicable
+Rana italica	Rana italica	evaluated	data/evaluated_species_32.txt	not_applicable
+Rana latastei	Rana latastei	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Rana temporaria	Rana temporaria	evaluated	data/evaluated_species_32.txt	not_applicable
+Salamandra atra	Salamandra atra	evaluated	data/evaluated_species_32.txt	not_applicable
+Salamandra lanzai	Salamandra lanzai	evaluated	data/evaluated_species_32.txt	not_applicable
+Salamandra salamandra	Salamandra salamandra	evaluated	data/evaluated_species_32.txt	not_applicable
+Salamandrina perspicillata	Salamandrina perspicillata	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Salamandrina terdigitata	Salamandrina terdigitata	evaluated	data/evaluated_species_32.txt	not_applicable
+Speleomantes ambrosii	Speleomantes ambrosii	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes flavus	Speleomantes flavus	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes genei	Speleomantes genei	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes imperialis	Speleomantes imperialis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes italicus	Speleomantes italicus	evaluated	data/evaluated_species_32.txt	not_applicable
+Speleomantes strinatii	Speleomantes strinatii	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes supramontis	Speleomantes supramontis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Speleomantes sarrabusensis	Speleomantes sarrabusensis	no_batra_amplicon	results/insilico_filtering_results/species_no_batra_amplicon.txt	not_applicable
+Triturus carnifex	Triturus carnifex	evaluated	data/evaluated_species_32.txt	not_applicable
+Xenopus laevis	Xenopus laevis	evaluated	data/evaluated_species_32.txt	not_applicable
