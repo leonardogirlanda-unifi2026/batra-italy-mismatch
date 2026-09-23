@@ -58,7 +58,7 @@ Reverse: GTAYACTTACCATGTTACGACTT
 
 ### Retrieve mitochondrial records
 
-[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) queries NCBI Nucleotide separately for each taxon. The query retrieves mitochondrial records between 50 and 30,000 bp that either contain a 12S-related annotation or are 5,000--30,000 bp long. This second condition retains mitochondrial genomes that may not be indexed with a 12S annotation.
+[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) The query searches mitochondrial records between 50 and 30,000 bp. It retrieves short and long records annotated with 12S-related terms, and additionally retains mitochondrial records between 5,000 and 30,000 bp even when their NCBI annotation does not contain a 12S term.
 
 The query operates on assembled NCBI Nucleotide records. It does not search raw reads deposited only in the Sequence Read Archive.
 
