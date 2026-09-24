@@ -132,6 +132,7 @@ The raw FASTQ files are available from the corresponding author upon reasonable 
 
 ## References
 If you use this workflow please cite: 
+
 Bolger, A.M., Lohse, M. and Usadel, B. (2014): Trimmomatic: a flexible trimmer for Illumina sequence data. Bioinformatics 30: 2114–2120. https://doi.org/10.1093/bioinformatics/btu170
 
 Elbrecht, V. and Leese, F. (2017): PrimerMiner: an R package for development and in silico validation of DNA metabarcoding primers. Methods in Ecology and Evolution 8: 622–626. https://doi.org/10.1111/2041-210X.12687
