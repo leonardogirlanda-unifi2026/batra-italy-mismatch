@@ -109,7 +109,7 @@ The working reference database contained 94 record occurrences: 91 public GenBan
 
 ### Final taxon-by-site table
 
-The final post-decontamination ASV table is available as both [`empirical/results/INNATURA_ASV_table_corrected.tsv`](empirical/results/INNATURA_ASV_table_corrected.tsv) and [`empirical/results/INNATURA_ASV_table_corrected.xlsx`](empirical/results/INNATURA_ASV_table_corrected.xlsx). It reports the taxonomic assignments aggregated by Natura 2000 site.
+The final post-decontamination ASV table is available as both [`empirical/results/INNATURA_ASV_table_decontaminated.tsv`](empirical/results/INNATURA_ASV_table_decontaminated.tsv) and [`empirical/results/INNATURA_ASV_table_decontaminated.xlsx`](empirical/results/INNATURA_ASV_table_decontaminated.xlsx). It reports the taxonomic assignments aggregated by Natura 2000 site.
 
 ## Adapting the workflow to another marker
 
