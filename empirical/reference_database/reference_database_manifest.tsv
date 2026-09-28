@@ -93,3 +93,6 @@ DB091	RS3-Batr01_Bufotes-viridis	1	Bufotes viridis	in-house		51	Internal record;
 DB092	RS7-Batr01_Bufotes-viridis	1	Bufotes viridis	in-house		51	Internal record; no public accession	FJ882813	Batra sequence identical to public record FJ882813.
 DB093	U52726-Batra_Epidalea;Epidalea_calamita	1	Epidalea calamita	NCBI GenBank	U52726	51	Retrieve from NCBI Nucleotide using the listed accession		
 DB094	Y10943-Batra_Xenopus_laevis	1	Xenopus laevis	NCBI GenBank	Y10943	54	Retrieve from NCBI Nucleotide using the listed accession		
+DB095	U52727-Batra_Bufotes_viridis	1	Bufotes viridis	NCBI GenBank	U52727	51	Retrieve from NCBI Nucleotide using the listed accession		
+DB096	AY680267-Batra_Bufotes_viridis	1	Bufotes viridis	NCBI GenBank	AY680267	51	Retrieve from NCBI Nucleotide using the listed accession		
+DB097	OZ457554-Batra_Rana_italica	1	Rana italica	NCBI GenBank	OZ457554	52	Retrieve from NCBI Nucleotide using the listed accession		

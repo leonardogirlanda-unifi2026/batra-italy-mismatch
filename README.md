@@ -143,7 +143,7 @@ Raw reads were processed with Barque v1.8.5. (https://github.com/enormandeau/bar
 [`empirical/reference_database/reference_database_manifest.tsv`](empirical/reference_database/reference_database_manifest.tsv) describes the amphibian reference records used for taxonomic assignment. It reports taxon labels, record identifiers, source, public GenBank accession where available, sequence length and public-equivalent information for in-house records.
 
 
-[`empirical/reference_database/BATRA_reference_database_public_records.fasta`](empirical/reference_database/BATRA_reference_database_public_records.fasta) releases the public component of the assignment database: 91 GenBank record occurrences representing 90 unique accessions. The three in-house records used in the working database remain documented in the manifest but are not included in the released FASTA. This assignment database is broader than the Italy-focused in silico assessment because it reflects the records used during empirical sequence assignment.
+[`empirical/reference_database/BATRA_reference_database_public_records.fasta`](empirical/reference_database/BATRA_reference_database_public_records.fasta) releases the public component of the assignment database: 94 GenBank record occurrences representing 93 unique accessions. The three in-house records used in the working database remain documented in the manifest but are not included in the released FASTA. This assignment database is broader than the Italy-focused in silico assessment because it reflects the records used during empirical sequence assignment.
 
 
 ### Final taxon-by-site table
