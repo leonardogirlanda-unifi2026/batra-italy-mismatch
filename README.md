@@ -45,7 +45,8 @@ The 32 taxa assessed in silico comprise 28 native taxa and four allochthonous ta
     ├── reference_database/          # public reference FASTA and record-level manifest
     ├── results/                     # final site-level ASV table
     ├── raw_reads_manifest.tsv       # per-file read metadata and checksums
-    └── raw_reads_summary.tsv         # read totals by library role
+    ├── raw_reads_summary.tsv        # read totals by library role
+    └── SRA_submission_metadata.tsv  # SRA submission and release information
 ```
 
 
@@ -76,7 +77,7 @@ Reverse: GTAYACTTACCATGTTACGACTT
 ### Retrieve mitochondrial records
 
 
-[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) The query searches mitochondrial records between 50 and 30,000 bp using Entrez Direct (Kans, 2013). It retrieves short and long records annotated with 12S-related terms, and additionally retains mitochondrial records between 5,000 and 30,000 bp even when their NCBI annotation does not contain a 12S term.
+[`Scripts/01_ncbi_download.sh`](Scripts/01_ncbi_download.sh) queries mitochondrial records between 50 and 30,000 bp using Entrez Direct (Kans, 2013). It retrieves short and long records annotated with 12S-related terms, and additionally retains mitochondrial records between 5,000 and 30,000 bp even when their NCBI annotation does not contain a 12S term.
 
 
 The query operates on assembled NCBI Nucleotide records. It does not search raw reads deposited only in the Sequence Read Archive.
@@ -88,7 +89,7 @@ The retrieved accession occurrences are listed in [`data/accessions_initial_781.
 ### Screen, curate and dereplicate sequences
 
 
-[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS (Jeunen et al., 2023) using the `batra` primer pair and an error value of 4.5 mismatches for each primers (default setting). [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
+[`Scripts/02_crabs_insilico_pcr.sh`](Scripts/02_crabs_insilico_pcr.sh) screens the retrieved records with CRABS (Jeunen et al., 2023) using the `batra` primer pair and an error value of 4.5 mismatches for each primer (default setting). [`Scripts/03_fetch_full_sequences.sh`](Scripts/03_fetch_full_sequences.sh) retrieves the corresponding full records.
 
 
 The retained records were then aligned and inspected manually in Geneious Prime (Kearse et al., 2012). Sequences were excluded from mismatch scoring when they lacked the complete `batra` amplicon or either primer-binding region. Records with primer-binding mismatches inconsistent with other sequences of the same species were also excluded as probable sequencing or annotation errors.
@@ -131,10 +132,10 @@ The released results are:
 ### Sequencing data and workflow settings
 
 
-The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls. [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) provides library role, site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
+The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls containing DNA from *Aglyptodactylus madagascariensis*. [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) provides library role, Natura 2000 site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
 
 
-Raw reads were processed with Barque v1.8.5. (https://github.com/enormandeau/barque) [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, chimera removal, dereplication, denoising and taxonomic assignment. ASVs detected in negative controls were removed with microDecon (https://github.com/donaldtmcknight/microDecon).
+Raw reads were processed with Barque v1.8.5 (https://github.com/enormandeau/barque). [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, chimera removal, dereplication, denoising and taxonomic assignment. ASVs detected in negative controls were removed with microDecon (https://github.com/donaldtmcknight/microDecon).
 
 
 ### Metabarcoding assignment database
@@ -175,7 +176,7 @@ The empirical workflow uses Barque v1.8.5 (https://github.com/enormandeau/barque
 ## Raw-read access
 
 
-The raw FASTQ files are available from the corresponding author upon reasonable request. The repository provides their filenames, library roles, read counts and SHA-256 checksums so that requested files can be checked against the dataset used in the study.
+The raw FASTQ files have been submitted to the NCBI Sequence Read Archive under submission ID `SUB16516650`, with release requested immediately following NCBI processing. This is a submission tracking identifier; the final public BioProject, BioSample and SRA accession numbers will be added here when assigned. [`empirical/SRA_submission_metadata.tsv`](empirical/SRA_submission_metadata.tsv) records the current submission information. The repository also provides filenames, library roles, read counts and SHA-256 checksums in [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv).
 
 
 ## References
