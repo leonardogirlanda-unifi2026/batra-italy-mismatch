@@ -1,8 +1,9 @@
 field	value
 repository	NCBI Sequence Read Archive
 submission_id	SUB16516650
-submission_status	submitted; public accessions pending NCBI processing
-release_policy	immediately following NCBI processing
+bioproject_accession	PRJNA1563383
+submission_status	public BioProject accession assigned
+release_policy	immediate
 data_type	raw paired-end Illumina MiSeq FASTQ reads
 number_of_libraries	62
 number_of_read_pairs	2083452
