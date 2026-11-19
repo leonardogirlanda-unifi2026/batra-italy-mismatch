@@ -35,7 +35,7 @@ The 32 taxa assessed in silico comprise 28 native taxa and four allochthonous ta
     ├── analysis/                    # Barque configuration and primer definition
     ├── reference_database/          # public reference FASTA and reference-record table
     ├── results/                     # final site-level ASV table
-    ├── raw_reads_manifest.tsv       # per-file read metadata and checksums
+    ├── raw_reads_information.tsv       # per-file read metadata and checksums
     ├── raw_reads_summary.tsv        # read totals by library role
     └── SRA_submission_metadata.tsv  # SRA accession and release information
 ```
@@ -98,13 +98,13 @@ The released results are:
 
 ### Sequencing data and workflow settings
 
-The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls containing DNA from *Aglyptodactylus madagascariensis*. [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv) provides library role, Natura 2000 site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
+The field dataset contains 62 paired-end libraries: 48 field-sample libraries, eight field blanks, three PCR-negative controls and three positive controls containing DNA from *Aglyptodactylus madagascariensis*. [`empirical/raw_reads_information.tsv`](empirical/raw_reads_information.tsv) provides library role, Natura 2000 site code, read direction, filename, read count and SHA-256 checksum for each FASTQ file. [`empirical/raw_reads_summary.tsv`](empirical/raw_reads_summary.tsv) provides the corresponding totals by library role.
 
 Raw reads were processed with Barque v1.8.5 (https://github.com/enormandeau/barque). [`empirical/analysis/barque_config_BATRA.sh`](empirical/analysis/barque_config_BATRA.sh) contains the study configuration, and [`empirical/analysis/primers.csv`](empirical/analysis/primers.csv) contains the primer and assignment settings. The processing includes trimming, primer removal, read merging, dereplication, denoising, chimera detection and removal, and taxonomic assignment. ASVs detected in negative controls were removed with microDecon (https://github.com/donaldtmcknight/microDecon).
 
 ### Metabarcoding assignment database
 
-[`empirical/reference_database/reference_database_manifest.tsv`](empirical/reference_database/reference_database_manifest.tsv) lists the 94 public reference records used for taxonomic assignment, including the taxon label, record identifier, GenBank accession, source and sequence length.
+[`empirical/reference_database/reference_database_information.tsv`](empirical/reference_database/reference_database_information.tsv) lists the 94 public reference records used for taxonomic assignment, including the taxon label, record identifier, GenBank accession, source and sequence length.
 
 [`empirical/reference_database/BATRA_reference_database_public_records.fasta`](empirical/reference_database/BATRA_reference_database_public_records.fasta) contains the same 94 reference-record occurrences, representing 93 unique GenBank accessions because accession PP471678 occurs twice in the database. This assignment database is broader than the Italy-focused in silico assessment because it reflects the records used during empirical sequence assignment.
 
@@ -129,7 +129,7 @@ The empirical workflow uses Barque v1.8.5 (https://github.com/enormandeau/barque
 
 ## Raw-read access
 
-The raw FASTQ files are available in the NCBI Sequence Read Archive under BioProject accession `PRJNA1563383`. [`empirical/SRA_submission_metadata.tsv`](empirical/SRA_submission_metadata.tsv) records the submission and public accession information. The repository also provides filenames, library roles, read counts and SHA-256 checksums in [`empirical/raw_reads_manifest.tsv`](empirical/raw_reads_manifest.tsv).
+The raw FASTQ files are available in the NCBI Sequence Read Archive under BioProject accession `PRJNA1563383`. [`empirical/SRA_submission_metadata.tsv`](empirical/SRA_submission_metadata.tsv) records the submission and public accession information. The repository also provides filenames, library roles, read counts and SHA-256 checksums in [`empirical/raw_reads_information.tsv`](empirical/raw_reads_information.tsv).
 
 ## References
 If you use this workflow please cite: 
